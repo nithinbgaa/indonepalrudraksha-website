@@ -3,9 +3,11 @@
 //   node scripts/prepare-images.mjs ~/Desktop/IndoNepal-Website
 //
 // Re-run it whenever a photo changes. Output files are committed to the repo.
-// Founder photos: only the numbers listed in FOUNDER_PUBLISHED are processed, so photos that
-// are not cleared for publishing never reach public/ (anything in public/ is downloadable).
-// PowerPoint and PDF founder files must first be exported as a JPG with the same number (e.g. 07.jpg).
+// Founder photos are only processed with --founder, so the current ones are never overwritten by
+// accident. The images in public/images/founder were taken straight out of the PowerPoint/PDF files
+// (full original size). Slide exports from PowerPoint include the white slide around the photo, so
+// white margins are trimmed, but the photo is still smaller than the original: prefer the original.
+//   node scripts/prepare-images.mjs ~/Desktop/IndoNepal-Website --founder
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
@@ -98,10 +100,18 @@ for (const [folder, slug] of Object.entries(MALAS)) {
   const f = firstImage(path.join(src, "photos", "malas", folder));
   if (f) await write(f, path.join(out, "malas", `${slug}.webp`), 1400);
 }
-for (const id of FOUNDER_PUBLISHED) {
+for (const id of process.argv.includes("--founder") ? FOUNDER_PUBLISHED : []) {
   const dir = path.join(src, "photos", "founder");
   const f = fs.existsSync(dir) && fs.readdirSync(dir).find((n) => n.startsWith(id + ".") && IMG.test(n));
-  if (f) await write(path.join(dir, f), path.join(out, "founder", `${id}.webp`), 1400);
+  if (f) {
+    const trimmed = await sharp(path.join(dir, f))
+      .rotate()
+      .toColourspace("srgb")
+      .trim({ background: "#ffffff", threshold: 12 })
+      .png()
+      .toBuffer();
+    await write(trimmed, path.join(out, "founder", `${id}.webp`), 1400);
+  }
   else console.warn(`founder ${id}: no JPG/PNG found (export it from the PowerPoint/PDF first)`);
 }
 const painting = path.join(src, "design", "assets", "shiva-painting-lit.jpg");
