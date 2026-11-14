@@ -2,8 +2,8 @@
 
 // "Founder's Word": his bio beside a slideshow of his photos (all 17), with captions and thumbnails.
 // The slideshow moves on every few seconds while it is on screen. It stops while the visitor hovers
-// over it or uses it, and never moves by itself when reduced motion is asked for. Photos change
-// instantly (no sliding), at Rado's request.
+// over it or uses it, and never moves by itself when reduced motion is asked for. Photos slide
+// smoothly, 2 seconds each, at Rado's request.
 
 import { useEffect, useRef, useState } from "react";
 import { founderBio, publishedFounderSlides as slides } from "@/data/founder";
@@ -20,7 +20,7 @@ export function FounderCarousel() {
   const [holding, setHolding] = useState(false); // hover or keyboard focus inside
   const [visible, setVisible] = useState(false);
   const auto = !reduced && !holding && visible;
-  const INTERVAL = 2500; // ms each photo stays
+  const INTERVAL = 2000; // ms each photo stays
 
   useEffect(() => {
     const el = rail.current;
@@ -51,7 +51,7 @@ export function FounderCarousel() {
     if (!el) return;
     const n = ((k % count) + count) % count;
     // jump straight back to the first photo instead of sliding past all of them
-    el.scrollTo({ left: n * el.clientWidth, behavior: "instant" });
+    el.scrollTo({ left: n * el.clientWidth, behavior: "smooth" });
   };
 
   // only run while the slideshow is on screen
@@ -69,7 +69,7 @@ export function FounderCarousel() {
       const el = rail.current;
       if (!el) return;
       const n = (i + 1) % count;
-      el.scrollTo({ left: n * el.clientWidth, behavior: "instant" });
+      el.scrollTo({ left: n * el.clientWidth, behavior: "smooth" });
     }, INTERVAL);
     return () => clearTimeout(t);
   }, [auto, i, count]);
