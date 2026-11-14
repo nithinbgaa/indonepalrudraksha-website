@@ -40,9 +40,12 @@ Domain: https://indonepalrudrakshaorganisation.in. Maintained by Rado for IndoNe
 
 ## Rules
 
-- **Founder photos:** never put a photo in `public/` unless it is cleared for publishing (lawyer review groups
-  A–C: PM/President/VP/Governor, politicians, film celebrities). Launch set is 07, 13, 17. Do not name the
-  Prime Minister or other dignitaries in founder text until cleared.
+- **Founder photos:** all 17 are published at Rado's request (2026-11-14), each with its caption and lawyer review
+  group in `src/data/founder.ts`. To hide one, set `published: false` and delete its file from
+  `public/images/founder/` (anything in `public/` can be downloaded). The bio leaves out the book release by the
+  Indian Prime Minister and the list of named leaders from business-info.txt; add them only if Rado asks.
+- **Product photos** are the main picture on bead and mala pages; the drawn bead/mala only shows where there is
+  no photo yet (Garbha Gauri Shankar, bracelets). Bead photos are padded to white squares by the image script.
 - Name format on the site: **Dr. Panduranga Rao Garu** (short: Panduranga Rao Garu).
 - WhatsApp: +91 91777 78852 (`919177778852` in links). Email: info@indonepalrudrakshaorganisation.in.
 - Use the design tokens in `src/app/globals.css` (`text-heading`, `bg-ground`, `bg-saffron`, `font-display` …),

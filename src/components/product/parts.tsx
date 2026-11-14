@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Backdrop } from "@/components/ui/backdrop";
-import { PhotoTiles } from "./photo-tiles";
+import { ProductPhotos } from "./photo-tiles";
 
 export function ProductMain({
   crumbs,
@@ -47,30 +47,38 @@ export function ProductMain({
   );
 }
 
-/** Left column: drawing inside the double ring, caption, photos. */
+/** Left column: the real photo (or, if there is none yet, the drawing inside the double ring) and a caption. */
 export function ProductVisual({
   caption,
   photos,
   photoAlt,
+  shape,
   children,
 }: {
   caption: string;
   photos: string[];
   photoAlt: string;
+  shape: "circle" | "arch";
   children: React.ReactNode;
 }) {
   return (
     <div className="flex min-w-0 flex-[1_1_380px] flex-col items-center gap-5">
-      <div className="relative flex aspect-square w-full max-w-[480px] items-center justify-center rounded-full">
-        <div aria-hidden="true" className="absolute inset-0 rounded-full border border-[rgba(142,195,224,0.35)]" />
-        <div
-          aria-hidden="true"
-          className="absolute inset-[7%] rounded-full border border-dashed border-[rgba(142,195,224,0.25)]"
-        />
-        {children}
-      </div>
+      {photos.length > 0 ? (
+        <ProductPhotos photos={photos} alt={photoAlt} shape={shape} />
+      ) : (
+        <div className="relative flex aspect-square w-full max-w-[480px] items-center justify-center rounded-full">
+          <div aria-hidden="true" className="absolute inset-0 rounded-full border border-[rgba(142,195,224,0.35)]" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-[7%] rounded-full border border-dashed border-[rgba(142,195,224,0.25)]"
+          />
+          {children}
+        </div>
+      )}
       <span className="text-center text-[13px] tracking-[0.2em] text-line uppercase">{caption}</span>
-      {photos.length > 0 && <PhotoTiles photos={photos} alt={photoAlt} />}
+      {photos.length === 0 && (
+        <span className="-mt-3 text-center text-[13px] text-muted">Illustration · photo coming soon</span>
+      )}
     </div>
   );
 }

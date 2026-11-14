@@ -37,6 +37,7 @@ export function MalaPage({ m }: { m: MalaItem }) {
           caption={isMala ? "Strung with a guru bead" : "Strung for everyday wear"}
           photos={m.photos}
           photoAlt={m.title}
+          shape="arch"
         >
           <div className="w-[88%]">
             <MalaArt uid="mp" material={m.material} form={m.form} pendant={m.pendant} />

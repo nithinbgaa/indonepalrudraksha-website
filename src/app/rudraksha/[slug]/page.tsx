@@ -145,7 +145,7 @@ export default async function BeadPage({ params }: PageProps<"/rudraksha/[slug]"
       <ProductMain
         crumbs={[{ href: "/", label: "Home" }, { href: "/#collection", label: "Rudraksha" }, { label: b.short }]}
       >
-        <ProductVisual caption={b.caption} photos={b.photos} photoAlt={b.title}>
+        <ProductVisual caption={b.caption} photos={b.photos} photoAlt={b.title} shape="circle">
           <BeadDrawing b={b} />
         </ProductVisual>
 

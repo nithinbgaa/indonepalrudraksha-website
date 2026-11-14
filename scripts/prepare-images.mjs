@@ -10,7 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
-const FOUNDER_PUBLISHED = ["07", "13", "17"]; // keep in step with src/data/founder.ts
+const FOUNDER_PUBLISHED = Array.from({ length: 17 }, (_, i) => String(i + 1).padStart(2, "0")); // keep in step with src/data/founder.ts
 
 const src = process.argv[2];
 if (!src || !fs.existsSync(src)) {
@@ -58,9 +58,41 @@ async function write(input, file, max) {
   console.log(`${path.relative(out, file)}  ${m.width}×${m.height}`);
 }
 
+// Bead photos: trim a thin border, fade the light studio background to white, and pad to a white
+// square, so the bead sits centred in the round frame on its page without a visible photo edge.
+async function writeBead(input, file) {
+  const base = sharp(input).rotate().toColourspace("srgb").removeAlpha();
+  const meta = await base.metadata();
+  const cut = 4;
+  const { data, info } = await base
+    .extract({ left: cut, top: cut, width: meta.width - 2 * cut, height: meta.height - 2 * cut })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  for (let i = 0; i < data.length; i += 3) {
+    const lo = Math.min(data[i], data[i + 1], data[i + 2]);
+    const hi = Math.max(data[i], data[i + 1], data[i + 2]);
+    if (hi - lo > 45) continue; // coloured pixel: part of the bead
+    const t = Math.max(0, Math.min(1, (lo - 200) / 30)); // near-white grey or beige → white
+    for (let k = 0; k < 3; k++) data[i + k] = Math.round(data[i + k] + (255 - data[i + k]) * t);
+  }
+  const { width: w, height: h } = info;
+  const side = Math.round(Math.max(w, h) * 1.22);
+  const padded = await sharp(data, { raw: info })
+    .extend({
+      top: Math.floor((side - h) / 2),
+      bottom: Math.ceil((side - h) / 2),
+      left: Math.floor((side - w) / 2),
+      right: Math.ceil((side - w) / 2),
+      background: { r: 255, g: 255, b: 255 },
+    })
+    .png()
+    .toBuffer();
+  await write(padded, file, 1000);
+}
+
 for (const [folder, slug] of Object.entries(BEADS)) {
   const f = firstImage(path.join(src, "photos", "beads", folder));
-  if (f) await write(f, path.join(out, "beads", `${slug}.webp`), 1000);
+  if (f) await writeBead(f, path.join(out, "beads", `${slug}.webp`));
 }
 for (const [folder, slug] of Object.entries(MALAS)) {
   const f = firstImage(path.join(src, "photos", "malas", folder));

@@ -4,30 +4,61 @@ import { useState } from "react";
 import { Modal } from "@/components/ui/drawer";
 import { Close } from "@/components/ui/icons";
 
-/** Real photos under the drawing. Tap one to see it large. */
-export function PhotoTiles({ photos, alt }: { photos: string[]; alt: string }) {
+/**
+ * The product's real photos. The first is the main picture: round inside the double ring for beads,
+ * an arch for malas. Any further photos show as tiles underneath. Tap any photo to see it large.
+ */
+export function ProductPhotos({ photos, alt, shape }: { photos: string[]; alt: string; shape: "circle" | "arch" }) {
   const [open, setOpen] = useState<string | null>(null);
+  const [main, ...more] = photos;
   return (
     <>
-      <div className="flex w-full max-w-[480px] flex-col gap-2">
-        <span className="text-[13px] tracking-[0.2em] text-muted uppercase">
-          {photos.length > 1 ? "Photos" : "Photo"}
-        </span>
-        <div className="grid grid-cols-3 gap-3">
-          {photos.map((src, i) => (
+      {shape === "circle" ? (
+        <div className="relative flex aspect-square w-full max-w-[480px] items-center justify-center rounded-full">
+          <div aria-hidden="true" className="absolute inset-0 rounded-full border border-[rgba(142,195,224,0.35)]" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-[4%] rounded-full border border-dashed border-[rgba(142,195,224,0.3)]"
+          />
+          <button
+            type="button"
+            onClick={() => setOpen(main)}
+            aria-label={`Show the photo of the ${alt} larger`}
+            className="absolute inset-[8%] overflow-hidden rounded-full border border-[rgba(142,195,224,0.5)] bg-white p-0 shadow-[0_0_48px_rgba(120,190,235,0.28)] transition-transform hover:scale-[1.01]"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={main} alt={`Photo of the ${alt}`} className="size-full object-cover" />
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(main)}
+          aria-label={`Show the photo of the ${alt} larger`}
+          className="arch relative aspect-[4/5] w-full max-w-[420px] overflow-hidden border border-edge bg-black/25 p-0 shadow-[0_0_36px_rgba(120,190,235,0.18)] transition-transform hover:scale-[1.01]"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={main} alt={`Photo of the ${alt}`} className="size-full object-cover" />
+        </button>
+      )}
+
+      {more.length > 0 && (
+        <div className="grid w-full max-w-[480px] grid-cols-3 gap-3">
+          {more.map((src, i) => (
             <button
               key={src}
               type="button"
               onClick={() => setOpen(src)}
-              aria-label={`Show photo ${i + 1} of the ${alt} larger`}
+              aria-label={`Show photo ${i + 2} of the ${alt} larger`}
               className="aspect-square overflow-hidden rounded-[14px] border border-[rgba(142,195,224,0.3)] bg-white p-0 hover:border-chalk"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={`${alt}, photo ${i + 1}`} loading="lazy" className="size-full object-cover" />
+              <img src={src} alt={`${alt}, photo ${i + 2}`} loading="lazy" className="size-full object-cover" />
             </button>
           ))}
         </div>
-      </div>
+      )}
+
       <Modal
         open={!!open}
         onClose={() => setOpen(null)}
@@ -37,7 +68,7 @@ export function PhotoTiles({ photos, alt }: { photos: string[]; alt: string }) {
         <div className="relative overflow-hidden rounded-[18px] border border-[rgba(142,195,224,0.3)] bg-ground">
           {open && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={open} alt={alt} className="mx-auto block max-h-[80vh] w-auto max-w-full" />
+            <img src={open} alt={alt} className="mx-auto block max-h-[85vh] w-auto max-w-full" />
           )}
           <button
             type="button"
