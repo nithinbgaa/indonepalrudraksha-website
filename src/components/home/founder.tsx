@@ -1,10 +1,14 @@
 "use client";
 
-// "Founder's Word": his bio beside a carousel of his photos (all 17), with captions and thumbnails.
+// "Founder's Word": his bio beside a slideshow of his photos (all 17), with captions and thumbnails.
+// The slideshow moves on every few seconds while it is on screen. It stops while the visitor hovers
+// over it or uses it, can be paused, and never moves by itself when reduced motion is asked for.
 
 import { useEffect, useRef, useState } from "react";
 import { founderBio, publishedFounderSlides as slides } from "@/data/founder";
 import { site } from "@/data/site";
+import { useReducedMotion } from "@/lib/client-store";
+import { Pause, Play } from "@/components/ui/icons";
 import { ArrowButtons } from "./rail";
 
 export function FounderCarousel() {
@@ -12,6 +16,12 @@ export function FounderCarousel() {
   const thumbs = useRef<HTMLDivElement>(null);
   const [i, setI] = useState(0);
   const count = slides.length;
+  const reduced = useReducedMotion();
+  const [paused, setPaused] = useState(false);
+  const [holding, setHolding] = useState(false); // hover or keyboard focus inside
+  const [visible, setVisible] = useState(false);
+  const auto = !reduced && !paused && !holding && visible;
+  const INTERVAL = 4500;
 
   useEffect(() => {
     const el = rail.current;
@@ -41,18 +51,47 @@ export function FounderCarousel() {
     const el = rail.current;
     if (!el) return;
     const n = ((k % count) + count) % count;
-    el.scrollTo({ left: n * el.clientWidth, behavior: "smooth" });
+    // jump straight back to the first photo instead of sliding past all of them
+    el.scrollTo({ left: n * el.clientWidth, behavior: k >= count || k < 0 ? "instant" : "smooth" });
   };
+
+  // only run while the slideshow is on screen
+  useEffect(() => {
+    const el = rail.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!auto) return;
+    const t = setTimeout(() => {
+      const el = rail.current;
+      if (!el) return;
+      const n = (i + 1) % count;
+      el.scrollTo({ left: n * el.clientWidth, behavior: n === 0 ? "instant" : "smooth" });
+    }, INTERVAL);
+    return () => clearTimeout(t);
+  }, [auto, i, count]);
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] items-start gap-x-14 gap-y-10">
       {/* photos */}
-      <div className="order-2 flex min-w-0 flex-col gap-4 lg:order-1">
+      <div
+        className="order-2 flex min-w-0 flex-col gap-4 lg:order-1"
+        onMouseEnter={() => setHolding(true)}
+        onMouseLeave={() => setHolding(false)}
+        onFocus={() => setHolding(true)}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) setHolding(false);
+        }}
+      >
         <div
           ref={rail}
           role="region"
           aria-roledescription="carousel"
-          aria-label="Photos of our founder, scroll sideways"
+          aria-label="Photos of our founder"
           tabIndex={0}
           className="rail"
         >
@@ -60,7 +99,7 @@ export function FounderCarousel() {
             <figure
               key={s.id}
               aria-roledescription="slide"
-              aria-label={`${k + 1} of ${count}`}
+              aria-label={s.caption}
               className="m-0 flex w-full flex-none snap-start flex-col gap-3"
             >
               <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-[22px] border border-edge bg-[rgba(0,0,0,0.35)] shadow-[0_0_36px_rgba(120,190,235,0.15)]">
@@ -77,9 +116,14 @@ export function FounderCarousel() {
           ))}
         </div>
         <div className="flex items-center justify-between gap-4">
-          <span className="text-sm tracking-[0.12em] text-line" aria-live="polite">
-            {i + 1} / {count}
-          </span>
+          <button
+            type="button"
+            onClick={() => setPaused(!paused)}
+            aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+            className={`flex size-12 items-center justify-center rounded-full border border-edge bg-[rgba(5,12,20,0.5)] text-heading hover:border-chalk ${reduced ? "invisible" : ""}`}
+          >
+            {paused ? <Play size={16} /> : <Pause size={16} />}
+          </button>
           <ArrowButtons label="photo" onPrev={() => go(i - 1)} onNext={() => go(i + 1)} />
         </div>
         <div ref={thumbs} className="flex [scrollbar-width:none] gap-2 overflow-x-auto pb-1">
@@ -88,7 +132,7 @@ export function FounderCarousel() {
               key={s.id}
               type="button"
               onClick={() => go(k)}
-              aria-label={`Photo ${k + 1}: ${s.caption}`}
+              aria-label={`Show photo: ${s.caption}`}
               aria-current={k === i}
               className={`h-12 w-16 flex-none overflow-hidden rounded-lg border p-0 transition-opacity ${
                 k === i

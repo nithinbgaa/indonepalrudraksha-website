@@ -56,9 +56,18 @@ export function MalaCollection() {
               href={itemHref(m)}
               tabIndex={-1}
               aria-hidden="true"
-              className="flex size-44 items-center justify-center"
+              className={
+                m.photos[0]
+                  ? "arch block h-[240px] w-[192px] overflow-hidden border border-edge bg-black/25 shadow-[0_0_24px_rgba(120,190,235,0.15)]"
+                  : "flex size-44 items-center justify-center"
+              }
             >
-              <MalaArt uid={`mc-${m.slug}`} material={m.material} form={m.form} pendant={m.pendant} />
+              {m.photos[0] ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={m.photos[0]} alt="" loading="lazy" className="size-full object-cover" />
+              ) : (
+                <MalaArt uid={`mc-${m.slug}`} material={m.material} form={m.form} pendant={m.pendant} />
+              )}
             </Link>
             <span className="rounded-full border border-[rgba(142,195,224,0.4)] px-2.5 py-0.5 text-[11px] tracking-[0.18em] text-line uppercase">
               {m.material === "karungali" ? "Karungali" : "Rudraksha"} {m.form}

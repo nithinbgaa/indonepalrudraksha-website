@@ -72,3 +72,6 @@ export function WhatsAppIcon({ size = 20, className }: P) {
     </svg>
   );
 }
+
+export const Pause = (p: P) => svg(<path d="M8 5v14M16 5v14" />, { strokeWidth: 2.2, ...p });
+export const Play = (p: P) => svg(<path d="M7 5l12 7-12 7z" fill="currentColor" />, { strokeWidth: 1.6, ...p });

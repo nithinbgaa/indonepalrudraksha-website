@@ -71,3 +71,17 @@ export function useSearch() {
     () => "",
   );
 }
+
+/** true when the visitor asked for reduced motion (false on the server). */
+function subscribeMotion(cb: () => void) {
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+export function useReducedMotion() {
+  return useSyncExternalStore(
+    subscribeMotion,
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false,
+  );
+}
