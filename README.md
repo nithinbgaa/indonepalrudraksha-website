@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IndoNepal Rudraksha — website
 
-## Getting Started
+Static Next.js site for [indonepalrudrakshaorganisation.in](https://indonepalrudrakshaorganisation.in):
+Nepali Rudraksha 1–16 Mukhi, rare beads, malas and bracelets, and horoscope consultations.
+Orders go through WhatsApp and Razorpay Payment Links; consultations through a Razorpay Payment Button.
 
-First, run the development server:
+## Run it
+
+Needs Node 22 (`nvm use`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # writes the static site to out/
+npm start          # serves out/ at http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Everyday changes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| To change…                                                 | Edit                                                                                     |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| A price, a bead's text, availability                       | `src/data/beads.ts`                                                                      |
+| Malas and bracelets                                        | `src/data/malas.ts`                                                                      |
+| WhatsApp number, address, announcement, consultation slots | `src/data/site.ts`                                                                       |
+| Razorpay consultation button                               | `consultation.razorpayButtonId` in `src/data/site.ts`                                    |
+| Founder photos and text                                    | `src/data/founder.ts` and `scripts/prepare-images.mjs`                                   |
+| Photos                                                     | replace them in the content folder, then `npm run images -- ~/Desktop/IndoNepal-Website` |
+| Policies                                                   | `src/app/{terms,privacy,shipping-and-returns,cancellation-and-refunds}/page.tsx`         |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Push to `main` and Cloudflare Pages rebuilds the site.
 
-## Learn More
+## Deploy on Cloudflare Pages
 
-To learn more about Next.js, take a look at the following resources:
+1. Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → this repository.
+2. Framework preset: Next.js (Static HTML Export). Build command `npm run build`. Output directory `out`.
+3. Environment variable `NODE_VERSION` = `22`.
+4. Custom domains → add `indonepalrudrakshaorganisation.in` and `www`. If DNS moves to Cloudflare, copy every
+   Google Workspace record (MX, SPF, DKIM, verification TXT) first, or email stops.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `CLAUDE.md` for how the site is built and the rules to keep.

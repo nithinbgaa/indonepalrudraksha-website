@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Design tokens from design/DESIGN-BRIEF.md. Use these names, not raw hex values. */
+@theme {
+  --color-ground: #0b1a29; /* page background */
+  --color-deep: #081320; /* nav and trust strip */
+  --color-deepest: #040910; /* footer */
+  --color-announce: #050b12;
+  --color-glow: #1e4e74;
+  --color-glow-mid: #133450;
+  --color-heading: #eaf4fa;
+  --color-body: #c9dce8;
+  --color-muted: #94b0c4;
+  --color-dim: #6f8ba0;
+  --color-line: #8ec3e0;
+  --color-chalk: #bfe0f2;
+  --color-edge: #4f86ad;
+  --color-hairline: rgb(142 195 224 / 0.22);
+  --color-card: rgb(5 12 20 / 0.58);
+  --color-saffron: #e39a4c;
+  --color-on-saffron: #1a0e05;
+  --color-delete: #e9a07a;
+
+  --font-display: "Marcellus", Georgia, serif;
+  --font-body: "Mukta", "Segoe UI", system-ui, sans-serif;
+  --font-deva: "Tiro Devanagari Sanskrit", "Mukta", serif;
+  --font-mantra: "Kalam", "Tiro Devanagari Sanskrit", cursive;
+  --font-tamil: "Noto Sans Tamil", "Mukta", sans-serif;
+
+  --shadow-glow: 0 0 24px rgb(120 190 235 / 0.35);
+  --text-shadow-glow: 0 0 24px rgb(120 190 235 / 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--color-ground);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  a {
+    color: var(--color-line);
+  }
+  a:hover {
+    color: var(--color-heading);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-chalk);
+    outline-offset: 3px;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: default;
+  }
+  input,
+  select,
+  textarea {
+    color-scheme: dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scroll-driven hero: a frame one screen tall, scrolled through 3.2 more screens. */
+.hero-frame {
+  height: clamp(600px, 100vh, 920px);
+}
+.hero-tall {
+  height: calc(clamp(600px, 100vh, 920px) * 4.2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-tall {
+    height: auto;
+  }
+}
+
+/* Horizontal carousels: snap, hidden scrollbar, soft edges. */
+.rail {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  outline: none;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail-fade {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 48px), transparent 100%);
+}
+
+.glow-heading {
+  text-shadow: var(--text-shadow-glow);
+}
+
+.arch {
+  border-radius: 200px 200px 18px 18px;
+}
+
+/* Long legal pages */
+.prose-policy h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.25;
+  color: var(--color-heading);
+  margin: 40px 0 12px;
+}
+.prose-policy h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-heading);
+  margin: 24px 0 8px;
+}
+.prose-policy p,
+.prose-policy ul,
+.prose-policy ol {
+  margin: 0 0 14px;
+}
+.prose-policy ul,
+.prose-policy ol {
+  padding-left: 22px;
+}
+.prose-policy ul {
+  list-style: disc;
+}
+.prose-policy ol {
+  list-style: decimal;
+}
+.prose-policy a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-policy li {
+  margin-bottom: 6px;
+}
+.prose-policy strong {
+  color: var(--color-heading);
+  font-weight: 600;
 }

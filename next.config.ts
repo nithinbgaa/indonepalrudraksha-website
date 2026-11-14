@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
+// Static export: the whole site is plain HTML/CSS/JS served from Cloudflare Pages.
+// No server, no database. See CLAUDE.md for what that rules out.
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  output: "export",
+  trailingSlash: true,
+  images: { unoptimized: true },
   turbopack: {
     rules: {
       "*.css": {
