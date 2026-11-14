@@ -2,13 +2,13 @@
 
 // "Founder's Word": his bio beside a slideshow of his photos (all 17), with captions and thumbnails.
 // The slideshow moves on every few seconds while it is on screen. It stops while the visitor hovers
-// over it or uses it, can be paused, and never moves by itself when reduced motion is asked for.
+// over it or uses it, and never moves by itself when reduced motion is asked for. Photos change
+// instantly (no sliding), at Rado's request.
 
 import { useEffect, useRef, useState } from "react";
 import { founderBio, publishedFounderSlides as slides } from "@/data/founder";
 import { site } from "@/data/site";
 import { useReducedMotion } from "@/lib/client-store";
-import { Pause, Play } from "@/components/ui/icons";
 import { ArrowButtons } from "./rail";
 
 export function FounderCarousel() {
@@ -17,11 +17,10 @@ export function FounderCarousel() {
   const [i, setI] = useState(0);
   const count = slides.length;
   const reduced = useReducedMotion();
-  const [paused, setPaused] = useState(false);
   const [holding, setHolding] = useState(false); // hover or keyboard focus inside
   const [visible, setVisible] = useState(false);
-  const auto = !reduced && !paused && !holding && visible;
-  const INTERVAL = 4500;
+  const auto = !reduced && !holding && visible;
+  const INTERVAL = 2500; // ms each photo stays
 
   useEffect(() => {
     const el = rail.current;
@@ -52,7 +51,7 @@ export function FounderCarousel() {
     if (!el) return;
     const n = ((k % count) + count) % count;
     // jump straight back to the first photo instead of sliding past all of them
-    el.scrollTo({ left: n * el.clientWidth, behavior: k >= count || k < 0 ? "instant" : "smooth" });
+    el.scrollTo({ left: n * el.clientWidth, behavior: "instant" });
   };
 
   // only run while the slideshow is on screen
@@ -70,7 +69,7 @@ export function FounderCarousel() {
       const el = rail.current;
       if (!el) return;
       const n = (i + 1) % count;
-      el.scrollTo({ left: n * el.clientWidth, behavior: n === 0 ? "instant" : "smooth" });
+      el.scrollTo({ left: n * el.clientWidth, behavior: "instant" });
     }, INTERVAL);
     return () => clearTimeout(t);
   }, [auto, i, count]);
@@ -107,7 +106,7 @@ export function FounderCarousel() {
                 <img
                   src={`/images/founder/${s.id}.webp`}
                   alt={`${site.founder.name} — ${s.caption}`}
-                  loading={k < 2 ? "eager" : "lazy"}
+                  loading={visible && k <= i + 2 ? "eager" : "lazy"}
                   className="size-full object-contain"
                 />
               </div>
@@ -115,15 +114,7 @@ export function FounderCarousel() {
             </figure>
           ))}
         </div>
-        <div className="flex items-center justify-between gap-4">
-          <button
-            type="button"
-            onClick={() => setPaused(!paused)}
-            aria-label={paused ? "Play slideshow" : "Pause slideshow"}
-            className={`flex size-12 items-center justify-center rounded-full border border-edge bg-[rgba(5,12,20,0.5)] text-heading hover:border-chalk ${reduced ? "invisible" : ""}`}
-          >
-            {paused ? <Play size={16} /> : <Pause size={16} />}
-          </button>
+        <div className="flex items-center justify-end gap-4">
           <ArrowButtons label="photo" onPrev={() => go(i - 1)} onNext={() => go(i + 1)} />
         </div>
         <div ref={thumbs} className="flex [scrollbar-width:none] gap-2 overflow-x-auto pb-1">
