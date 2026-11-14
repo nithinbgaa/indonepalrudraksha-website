@@ -97,16 +97,44 @@ export function Booking() {
 
   return (
     <div className="flex min-w-0 flex-[1_1_520px] flex-col gap-6 rounded-[22px] border border-[rgba(142,195,224,0.3)] bg-[rgba(5,12,20,0.62)] p-5 shadow-[0_0_60px_rgba(95,168,218,0.12)] sm:p-7">
-      <div className="flex flex-col gap-3 border-b border-[rgba(142,195,224,0.2)] pb-5">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-          <span className="font-display text-[22px] text-heading">Only 10 readings a day</span>
-          <span className="text-[15px] font-semibold text-saffron">
-            {inr(consultation.fee)} · {consultation.durationMinutes} minutes
-          </span>
+      {/* Ten readings a day. Every claim here is true for every visitor: a static site cannot know
+          how many slots are really left, so it never shows a fake "only N left" count. */}
+      <div
+        className="relative -mx-5 -mt-5 overflow-hidden rounded-t-[22px] border-b border-[rgba(227,154,76,0.35)] px-5 pt-6 pb-5 sm:-mx-7 sm:-mt-7 sm:px-7"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 120% at 0% 0%, rgba(227,154,76,0.22) 0%, rgba(227,154,76,0) 60%), radial-gradient(ellipse 60% 100% at 100% 100%, rgba(95,168,218,0.18) 0%, rgba(95,168,218,0) 70%)",
+        }}
+      >
+        <div className="flex items-center gap-4 sm:gap-5">
+          <div className="relative flex size-[84px] flex-none items-center justify-center rounded-full border border-[rgba(227,154,76,0.7)] bg-[rgba(5,12,20,0.55)] shadow-[0_0_32px_rgba(227,154,76,0.35)] sm:size-[96px]">
+            <span className="font-display text-[46px] leading-none text-saffron [text-shadow:0_0_18px_rgba(227,154,76,0.6)] sm:text-[54px]">
+              10
+            </span>
+          </div>
+          <div className="flex min-w-0 flex-col gap-1">
+            <span className="text-[12px] tracking-[0.28em] text-saffron uppercase">Strictly limited</span>
+            <span className="glow-heading font-display text-[26px] leading-[1.1] text-heading sm:text-[30px]">
+              Only 10 readings a day
+            </span>
+            <span className="text-[15px] text-chalk">
+              {inr(consultation.fee)} · {consultation.durationMinutes} minutes, one to one
+            </span>
+          </div>
         </div>
-        <span className="text-sm text-muted">
-          {site.founder.shortName} keeps each day to 10 readings so every one gets his full attention.
-        </span>
+
+        <div aria-hidden="true" className="mt-5 flex gap-1.5">
+          {Array.from({ length: 10 }, (_, k) => (
+            <span key={k} className="h-1.5 flex-1 rounded-full bg-saffron shadow-[0_0_8px_rgba(227,154,76,0.6)]" />
+          ))}
+        </div>
+
+        <p className="mt-4 mb-0 text-[15px] leading-relaxed text-body">
+          After three decades of guiding millions, {site.founder.name} still reads every chart himself — and only ten a
+          day, so each reading gets his full, unhurried attention. When a day&apos;s ten are taken, the next opening may
+          be days away.
+        </p>
+        <p className="mt-2 mb-0 text-[15px] font-semibold text-heading">Choose your day now, before it fills.</p>
       </div>
 
       {step === "pick" && (
