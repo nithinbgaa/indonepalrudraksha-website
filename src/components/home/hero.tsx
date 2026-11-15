@@ -35,6 +35,17 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const [dims, setDims] = useState<{ w: number; h: number; reduced: boolean } | null>(null);
   const [p, setP] = useState(0);
+  // Phones: the final words end well above the bottom of the frame (no "Choose your Mukhi" row there),
+  // so the section is pulled up by the empty space and the trust strip follows the buttons closely.
+  const textRef = useRef<HTMLDivElement>(null);
+  const [textH, setTextH] = useState(0);
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setTextH(el.offsetHeight));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   // measure the frame (its height comes from CSS: clamp(600px, 100vh, 920px))
   const frameRef = useRef<HTMLDivElement>(null);
@@ -185,6 +196,32 @@ export function Hero() {
   const t4 = seg(0.92, 1);
   const iO = seg(0.8, 0.94);
   const live = !!dims;
+  const trim = live && narrow && textH ? Math.max(0, Math.round(H - (Ty + textH) - 44)) : 0;
+
+  // A link like /#collection is followed before the trim is known; re-land on it whenever the trim
+  // settles during the first few seconds (fonts loading can change it), unless the visitor has scrolled.
+  const mountedAt = useRef(0);
+  const userScrolled = useRef(false);
+  useEffect(() => {
+    mountedAt.current = performance.now();
+    const mark = () => (userScrolled.current = true);
+    window.addEventListener("wheel", mark, { passive: true, once: true });
+    window.addEventListener("touchmove", mark, { passive: true, once: true });
+    window.addEventListener("keydown", mark, { once: true });
+    return () => {
+      window.removeEventListener("wheel", mark);
+      window.removeEventListener("touchmove", mark);
+      window.removeEventListener("keydown", mark);
+    };
+  }, []);
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!trim || hash.length < 2 || userScrolled.current || performance.now() - mountedAt.current > 4000) return;
+    const id = requestAnimationFrame(() =>
+      document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView({ behavior: "instant" }),
+    );
+    return () => cancelAnimationFrame(id);
+  }, [trim]);
 
   return (
     <section
@@ -192,6 +229,7 @@ export function Hero() {
       id="top"
       aria-label="Abhishekam — the sacred tears of Shiva"
       className="hero-tall relative bg-ground"
+      style={{ marginBottom: -trim }}
     >
       <div
         ref={frameRef}
@@ -306,6 +344,7 @@ export function Hero() {
 
         {/* 3 · Om waiting for the drop; 4 · the words */}
         <div
+          ref={textRef}
           className="absolute flex flex-col gap-[22px]"
           style={{
             left: Tx,

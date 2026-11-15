@@ -21,7 +21,7 @@ export default function Home() {
         <Hero />
 
         {/* Trust strip */}
-        <section aria-label="Our assurances" className="border-y border-hairline bg-deep">
+        <section aria-label="Our assurances" className="relative z-[1] border-y border-hairline bg-deep">
           <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-x-8 gap-y-[18px] px-6 py-[26px]">
             {[
               {
