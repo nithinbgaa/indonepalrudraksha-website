@@ -50,6 +50,10 @@ Domain: https://indonepalrudrakshaorganisation.in. Maintained by Rado for IndoNe
 - WhatsApp: +91 91777 78852 (`919177778852` in links). Email: info@indonepalrudrakshaorganisation.in.
 - Use the design tokens in `src/app/globals.css` (`text-heading`, `bg-ground`, `bg-saffron`, `font-display` …),
   not raw hex, for anything new.
+- **Mobile first.** Most visitors are on phones. Write base classes for a 360px phone and add `sm:`/`lg:` for
+  larger screens. Nothing may scroll sideways at 320px. On phones, bead and mala pages show a bottom bar with the
+  price and the main action (`src/components/product/mobile-bar.tsx`) until the page's own button is reached, and
+  the booking card's Continue button sticks to the bottom of the screen.
 - Accessibility: touch targets ≥ 44px, visible focus, `prefers-reduced-motion` respected (hero shows its final frame,
   the bead stops spinning, the Shivalinga's animations pause).
 - Text in [square brackets] is a placeholder waiting for the business. `npm run check:placeholders` lists them.

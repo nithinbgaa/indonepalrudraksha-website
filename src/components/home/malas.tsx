@@ -69,7 +69,7 @@ export function MalaCollection() {
                 <MalaArt uid={`mc-${m.slug}`} material={m.material} form={m.form} pendant={m.pendant} />
               )}
             </Link>
-            <span className="rounded-full border border-[rgba(142,195,224,0.4)] px-2.5 py-0.5 text-[11px] tracking-[0.18em] text-line uppercase">
+            <span className="rounded-full border border-[rgba(142,195,224,0.4)] px-2.5 py-0.5 text-xs tracking-[0.18em] text-line uppercase">
               {m.material === "karungali" ? "Karungali" : "Rudraksha"} {m.form}
             </span>
             <div className="flex flex-col">

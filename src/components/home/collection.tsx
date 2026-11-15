@@ -130,7 +130,7 @@ export function Collection() {
               <RareShape shape={b.shape as "gs" | "ggs" | "ganesh"} />
             </div>
             <div className="flex flex-col">
-              <span className="mb-1.5 self-center rounded-full border border-[rgba(227,154,76,0.6)] px-2.5 py-0.5 text-[11px] tracking-[0.18em] text-saffron uppercase">
+              <span className="mb-1.5 self-center rounded-full border border-[rgba(227,154,76,0.6)] px-2.5 py-0.5 text-xs tracking-[0.18em] text-saffron uppercase">
                 Rare bead
               </span>
               <h3 className="m-0 font-display text-[25px] leading-tight font-normal text-heading">{b.short}</h3>

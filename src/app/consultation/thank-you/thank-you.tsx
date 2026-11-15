@@ -48,7 +48,7 @@ export function ThankYou() {
       <span lang="sa" className="font-deva text-xl text-line">
         ॐ नमः शिवाय
       </span>
-      <Link href="/" className="text-line">
+      <Link href="/" className="inline-flex min-h-11 items-center text-line">
         Back to the shop
       </Link>
     </div>

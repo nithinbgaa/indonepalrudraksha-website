@@ -2,20 +2,20 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { whatsappLink } from "@/lib/format";
 
-const link = "text-body no-underline hover:text-heading";
+const link = "flex min-h-11 items-center text-body no-underline hover:text-heading lg:min-h-0 lg:py-0.5";
 
 export function SiteFooter() {
   return (
     <footer id="contact" className="relative overflow-hidden border-t border-hairline bg-deepest text-body">
       <div className="relative mx-auto flex max-w-[1200px] flex-col gap-12 px-6 pt-16 pb-8">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-10">
-          <div className="flex flex-col gap-3.5">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4 lg:gap-10">
+          <div className="col-span-2 flex flex-col gap-3.5 lg:col-span-1">
             <span className="font-display text-2xl text-heading">{site.name}</span>
             <span className="max-w-[260px] text-[15px] text-muted">
               Genuine Nepali Rudraksha, 1 to 16 Mukhi and rare beads.
             </span>
           </div>
-          <nav aria-label="Shop" className="flex flex-col gap-2 text-[15px]">
+          <nav aria-label="Shop" className="flex flex-col text-[15px] lg:gap-2">
             <span className="text-[13px] tracking-[0.2em] text-line uppercase">Shop</span>
             <Link href="/#collection" className={link}>
               1 – 5 Mukhi
@@ -39,7 +39,7 @@ export function SiteFooter() {
               Horoscope consultation
             </Link>
           </nav>
-          <nav aria-label="Help" className="flex flex-col gap-2 text-[15px]">
+          <nav aria-label="Help" className="flex flex-col text-[15px] lg:gap-2">
             <span className="text-[13px] tracking-[0.2em] text-line uppercase">Help</span>
             <Link href="/#promise" className={link}>
               Authenticity
@@ -60,7 +60,7 @@ export function SiteFooter() {
               Privacy policy
             </Link>
           </nav>
-          <div className="flex flex-col gap-2 text-[15px]">
+          <div className="col-span-2 flex flex-col gap-2 text-[15px] lg:col-span-1">
             <span className="text-[13px] tracking-[0.2em] text-line uppercase">Contact</span>
             <a href={whatsappLink()} target="_blank" rel="noopener" className={link}>
               WhatsApp {site.whatsappDisplay}

@@ -236,7 +236,7 @@ export function Booking() {
             type="button"
             onClick={toPay}
             disabled={!ready}
-            className="min-h-[52px] rounded-full border-0 bg-saffron text-[17px] font-semibold text-on-saffron disabled:opacity-50"
+            className="sticky bottom-[max(12px,env(safe-area-inset-bottom))] z-10 min-h-[52px] rounded-full border-0 bg-saffron text-[17px] font-semibold text-on-saffron shadow-[0_8px_28px_rgba(0,0,0,0.55)] disabled:bg-[#7a5634] disabled:text-[rgba(26,14,5,0.8)]"
           >
             {ready ? `Continue with ${slotLabel(selSlot!)}` : "Choose a slot"}
           </button>

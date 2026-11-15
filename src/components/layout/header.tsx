@@ -28,7 +28,7 @@ export function Logo({ small = false }: { small?: boolean }) {
       </span>
       <span className="flex flex-col leading-[1.1]">
         <span className={`font-display tracking-[0.02em] ${small ? "text-[21px]" : "text-[22px]"}`}>IndoNepal</span>
-        <span className={`tracking-[0.32em] text-muted uppercase ${small ? "text-[11px]" : "text-xs"}`}>Rudraksha</span>
+        <span className={`tracking-[0.32em] text-muted uppercase ${small ? "text-xs" : "text-xs"}`}>Rudraksha</span>
       </span>
     </Link>
   );
@@ -40,7 +40,7 @@ export function Announcement() {
       <span>Genuine Rudraksha from Nepal</span>
       {site.announcement && (
         <>
-          <span className="text-line" aria-hidden="true">
+          <span className="hidden text-line sm:inline" aria-hidden="true">
             ·
           </span>
           <span>{site.announcement}</span>
@@ -60,7 +60,7 @@ export function SiteHeader() {
           className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-x-8 gap-y-2 px-4 py-[18px] sm:px-6"
         >
           <Logo />
-          <div className="order-3 -mx-4 flex w-[calc(100%+2rem)] [scrollbar-width:none] gap-x-6 overflow-x-auto px-4 text-base sm:-mx-6 sm:w-[calc(100%+3rem)] sm:px-6 lg:order-none lg:mx-0 lg:w-auto lg:flex-wrap lg:gap-x-7 lg:overflow-visible lg:px-0">
+          <div className="order-3 -mx-4 flex w-[calc(100%+2rem)] [scrollbar-width:none] gap-x-6 overflow-x-auto [mask-image:linear-gradient(90deg,#000_85%,transparent)] px-4 text-base sm:-mx-6 sm:w-[calc(100%+3rem)] sm:px-6 lg:order-none lg:mx-0 lg:w-auto lg:flex-wrap lg:gap-x-7 lg:overflow-visible lg:[mask-image:none] lg:px-0">
             {NAV.map((n) => (
               <Link
                 key={n.href}

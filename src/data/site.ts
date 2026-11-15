@@ -13,7 +13,7 @@ export const site = {
   whatsappDisplay: "+91 91777 78852",
   email: "info@indonepalrudrakshaorganisation.in",
   address: [
-    "C/O Gullipalli Appalanaidu, Plot No. 1057/A, Bilwa-45",
+    "Plot No. 1057/A, Bilwa-45",
     "Road No. 45, Starting Point Cable Bridge, Jubilee Hills",
     "Hyderabad, Telangana 500033",
   ],

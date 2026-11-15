@@ -24,12 +24,15 @@ export function ProductMain({
       />
       <div className="relative mx-auto flex max-w-[1200px] flex-col gap-7 px-4 pt-10 pb-24 sm:px-6">
         <nav aria-label="Breadcrumb" className="text-sm text-muted">
-          <ol className="m-0 flex list-none flex-wrap gap-2 p-0">
+          <ol className="m-0 flex list-none flex-wrap items-center gap-x-2 p-0">
             {crumbs.map((c, i) => (
-              <li key={i} className="flex gap-2">
+              <li key={i} className="flex items-center gap-2">
                 {i > 0 && <span aria-hidden="true">/</span>}
                 {c.href ? (
-                  <Link href={c.href} className="text-muted no-underline hover:text-heading">
+                  <Link
+                    href={c.href}
+                    className="inline-flex min-h-11 items-center text-muted no-underline hover:text-heading"
+                  >
                     {c.label}
                   </Link>
                 ) : (

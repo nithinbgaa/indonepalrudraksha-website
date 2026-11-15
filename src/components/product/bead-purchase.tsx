@@ -4,7 +4,8 @@ import Link from "next/link";
 
 // Size, quantity and "Add to cart" for a priced bead. A link with ?size=collector preselects Collector.
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { MobileBar, useBelowFold } from "./mobile-bar";
 import { useSearch } from "@/lib/client-store";
 import { getBead, sizeLabel, sizeNote, type BeadSize } from "@/data/beads";
 import { site } from "@/data/site";
@@ -24,6 +25,12 @@ export function BeadPurchase({ slug, children }: { slug: string; children?: Reac
   const MAX = site.maxQtyPerItem;
 
   const price = prices[size];
+  const mainButton = useRef<HTMLButtonElement>(null);
+  const barVisible = useBelowFold(mainButton);
+  const addToCart = () => {
+    cart.add(bead.slug, size, qty);
+    setAdded({ qty, size });
+  };
 
   return (
     <>
@@ -59,7 +66,7 @@ export function BeadPurchase({ slug, children }: { slug: string; children?: Reac
                     : "border-edge bg-[rgba(5,12,20,0.5)] text-body hover:border-chalk"
                 }`}
               >
-                <span className="flex w-full items-baseline justify-between gap-2">
+                <span className="flex w-full flex-wrap items-baseline justify-between gap-x-2">
                   <span className="text-base font-medium">{sizeLabel[z]}</span>
                   <span className="font-display text-[17px]">{inr(prices[z])}</span>
                 </span>
@@ -119,11 +126,9 @@ export function BeadPurchase({ slug, children }: { slug: string; children?: Reac
 
       <div className="flex flex-col gap-3">
         <button
+          ref={mainButton}
           type="button"
-          onClick={() => {
-            cart.add(bead.slug, size, qty);
-            setAdded({ qty, size });
-          }}
+          onClick={addToCart}
           className="flex min-h-14 items-center justify-center gap-2.5 rounded-full border-0 bg-saffron text-lg font-semibold text-on-saffron shadow-[0_0_24px_rgba(120,190,235,0.25)] hover:bg-[#EBAA63]"
         >
           <Bag size={20} />
@@ -149,11 +154,27 @@ export function BeadPurchase({ slug, children }: { slug: string; children?: Reac
         )}
         <Link
           href="/consultation/"
-          className="self-start border-b border-edge py-1.5 text-[15px] text-chalk no-underline"
+          className="inline-flex min-h-11 items-center self-start border-b border-edge text-[15px] text-chalk no-underline"
         >
           Not sure this is your bead? Book a horoscope consultation
         </Link>
       </div>
+      <MobileBar show={barVisible}>
+        <span className="flex min-w-0 flex-col leading-tight">
+          <span className="font-display text-xl text-heading">{inr(price * qty)}</span>
+          <span className="truncate text-[13px] text-muted">
+            {qty} × {bead.short} · {sizeLabel[size]}
+          </span>
+        </span>
+        <button
+          type="button"
+          onClick={addToCart}
+          className="flex min-h-12 flex-none items-center gap-2 rounded-full border-0 bg-saffron px-5 text-base font-semibold text-on-saffron"
+        >
+          {added ? <Check size={18} /> : <Bag size={18} />}
+          {added ? "Added" : "Add to cart"}
+        </button>
+      </MobileBar>
     </>
   );
 }

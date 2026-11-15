@@ -15,7 +15,7 @@ export function ConsultSection({ headingLevel = "h2" }: { headingLevel?: "h1" | 
     <section
       id="consult"
       aria-label="Book a horoscope consultation"
-      className="relative scroll-mt-4 overflow-hidden border-t border-hairline"
+      className="relative scroll-mt-4 overflow-clip border-t border-hairline"
       style={{ background: "radial-gradient(ellipse 70% 60% at 70% 40%, #1E4E74 0%, #102C46 50%, #0B1A29 100%)" }}
     >
       <Backdrop

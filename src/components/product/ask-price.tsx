@@ -4,12 +4,16 @@ import Link from "next/link";
 
 // Items without a published price: optional bead-size choice, then "Ask for price" on WhatsApp.
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { MobileBar, useBelowFold } from "./mobile-bar";
 import { askPriceMessage, whatsappLink } from "@/lib/format";
 import { WhatsAppIcon } from "@/components/ui/icons";
 
 export function AskPrice({ name, sizes = [], consultText }: { name: string; sizes?: string[]; consultText: string }) {
   const [size, setSize] = useState<string | null>(sizes[1] ?? sizes[0] ?? null);
+  const mainLink = useRef<HTMLAnchorElement>(null);
+  const barVisible = useBelowFold(mainLink);
+  const href = whatsappLink(askPriceMessage(name, size));
   return (
     <>
       {sizes.length > 0 && (
@@ -42,7 +46,8 @@ export function AskPrice({ name, sizes = [], consultText }: { name: string; size
       )}
       <div className="flex flex-col gap-3 border-t border-hairline pt-[22px]">
         <a
-          href={whatsappLink(askPriceMessage(name, size))}
+          ref={mainLink}
+          href={href}
           target="_blank"
           rel="noopener"
           className="flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-saffron text-lg font-semibold text-on-saffron no-underline shadow-[0_0_24px_rgba(120,190,235,0.25)] hover:bg-[#EBAA63] hover:text-on-saffron"
@@ -56,11 +61,26 @@ export function AskPrice({ name, sizes = [], consultText }: { name: string; size
         </span>
         <Link
           href="/consultation/"
-          className="self-start border-b border-edge py-1.5 text-[15px] text-chalk no-underline"
+          className="inline-flex min-h-11 items-center self-start border-b border-edge text-[15px] text-chalk no-underline"
         >
           {consultText}
         </Link>
       </div>
+      <MobileBar show={barVisible}>
+        <span className="flex min-w-0 flex-col leading-tight">
+          <span className="truncate font-display text-lg text-heading">{name}</span>
+          <span className="text-[13px] text-muted">Price on request{size ? ` · ${size}` : ""}</span>
+        </span>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener"
+          className="flex min-h-12 flex-none items-center gap-2 rounded-full bg-saffron px-5 text-base font-semibold text-on-saffron no-underline hover:text-on-saffron"
+        >
+          <WhatsAppIcon size={18} />
+          Ask for price
+        </a>
+      </MobileBar>
     </>
   );
 }

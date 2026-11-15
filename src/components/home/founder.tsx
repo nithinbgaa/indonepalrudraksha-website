@@ -159,7 +159,10 @@ export function FounderCarousel() {
             {p}
           </p>
         ))}
-        <a href="#consult" className="self-start border-b border-edge py-1.5 text-[15px] text-chalk no-underline">
+        <a
+          href="#consult"
+          className="inline-flex min-h-11 items-center self-start border-b border-edge text-[15px] text-chalk no-underline"
+        >
           Book a horoscope consultation with him
         </a>
       </div>
