@@ -32,7 +32,16 @@ const INDEX = [
   { href: "/contact/", title: "Contact us", sub: "WhatsApp, email and address", extra: "phone" },
 ];
 
-export function SearchButton() {
+/** Search icon (header), or a full-width "Search" row (inside the phone menu). */
+export function SearchButton({
+  variant = "icon",
+  className = "",
+  onNavigate,
+}: {
+  variant?: "icon" | "row";
+  className?: string;
+  onNavigate?: () => void;
+}) {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
   const results = useMemo(() => {
@@ -46,14 +55,25 @@ export function SearchButton() {
 
   return (
     <>
-      <button
-        type="button"
-        aria-label="Search"
-        onClick={() => setOpen(true)}
-        className="flex size-11 items-center justify-center rounded-full border border-[rgba(142,195,224,0.35)] bg-transparent text-chalk hover:border-chalk"
-      >
-        <Search size={20} />
-      </button>
+      {variant === "icon" ? (
+        <button
+          type="button"
+          aria-label="Search"
+          onClick={() => setOpen(true)}
+          className={`flex size-11 items-center justify-center rounded-full border border-[rgba(142,195,224,0.35)] bg-transparent text-chalk hover:border-chalk ${className}`}
+        >
+          <Search size={20} />
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className={`flex min-h-12 w-full items-center gap-3 rounded-full border border-[rgba(142,195,224,0.35)] bg-[rgba(5,12,20,0.5)] px-5 text-left text-base text-muted ${className}`}
+        >
+          <Search size={18} className="text-line" />
+          Search beads, malas, deities…
+        </button>
+      )}
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -86,7 +106,10 @@ export function SearchButton() {
               <li key={r.href}>
                 <Link
                   href={r.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    onNavigate?.();
+                  }}
                   className="flex min-h-14 items-center justify-between gap-3 rounded-xl px-3 py-2 no-underline hover:bg-[rgba(95,168,218,0.14)]"
                 >
                   <span className="flex flex-col">

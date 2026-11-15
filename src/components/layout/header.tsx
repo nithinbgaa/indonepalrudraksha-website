@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { CartButton } from "@/components/cart/cart-button";
 import { SearchButton } from "@/components/layout/search";
+import { MenuButton } from "@/components/layout/menu";
 import { ChevronLeft } from "@/components/ui/icons";
 
 export const NAV = [
@@ -57,10 +58,11 @@ export function SiteHeader() {
       <header className="border-b border-hairline bg-deep">
         <nav
           aria-label="Main"
-          className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-x-8 gap-y-2 px-4 py-[18px] sm:px-6"
+          className="mx-auto flex max-w-[1200px] items-center justify-between gap-x-3 px-4 py-3.5 sm:px-6 lg:py-[18px] xl:gap-x-8"
         >
           <Logo />
-          <div className="order-3 -mx-4 flex w-[calc(100%+2rem)] [scrollbar-width:none] gap-x-6 overflow-x-auto [mask-image:linear-gradient(90deg,#000_85%,transparent)] px-4 text-base sm:-mx-6 sm:w-[calc(100%+3rem)] sm:px-6 lg:order-none lg:mx-0 lg:w-auto lg:flex-wrap lg:gap-x-7 lg:overflow-visible lg:[mask-image:none] lg:px-0">
+          {/* desktop: links in the bar; phones and tablets: the ☰ menu */}
+          <div className="hidden gap-x-7 text-base xl:flex">
             {NAV.map((n) => (
               <Link
                 key={n.href}
@@ -71,9 +73,10 @@ export function SiteHeader() {
               </Link>
             ))}
           </div>
-          <div className="flex items-center gap-3">
-            <SearchButton />
+          <div className="flex items-center gap-2 sm:gap-3">
+            <SearchButton className="max-[349px]:hidden" />
             <CartButton />
+            <MenuButton items={NAV} />
           </div>
         </nav>
       </header>
@@ -87,19 +90,20 @@ export function ProductHeader({ back }: { back: { href: string; label: string } 
     <header className="border-b border-hairline bg-deep">
       <nav
         aria-label="Main"
-        className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6"
+        className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-3.5 sm:px-6 lg:py-4"
       >
         <Logo small />
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href={back.href}
-            className="inline-flex min-h-11 items-center gap-2 px-1 text-[15px] text-body no-underline hover:text-heading"
+            className="hidden min-h-11 items-center gap-2 px-1 text-[15px] text-body no-underline hover:text-heading sm:inline-flex"
           >
             <ChevronLeft size={16} />
             {back.label}
           </Link>
-          <SearchButton />
+          <SearchButton className="max-[349px]:hidden" />
           <CartButton />
+          <MenuButton items={NAV} />
         </div>
       </nav>
     </header>

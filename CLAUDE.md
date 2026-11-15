@@ -54,6 +54,9 @@ Domain: https://indonepalrudrakshaorganisation.in. Maintained by Rado for IndoNe
   larger screens. Nothing may scroll sideways at 320px. On phones, bead and mala pages show a bottom bar with the
   price and the main action (`src/components/product/mobile-bar.tsx`) until the page's own button is reached, and
   the booking card's Continue button sticks to the bottom of the screen.
+- **Header:** below 1280px the page links collapse into the ☰ menu (`src/components/layout/menu.tsx`, a side
+  panel with search, all links, "Book a horoscope consultation" and WhatsApp). The search icon hides below 350px
+  (search stays in the menu). Edit the links once, in `NAV` in `src/components/layout/header.tsx`.
 - Accessibility: touch targets ≥ 44px, visible focus, `prefers-reduced-motion` respected (hero shows its final frame,
   the bead stops spinning, the Shivalinga's animations pause).
 - Text in [square brackets] is a placeholder waiting for the business. `npm run check:placeholders` lists them.
