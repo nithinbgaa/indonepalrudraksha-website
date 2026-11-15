@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
+  // Hide Next.js's "N" badge that `npm run dev` shows in the corner. It never appears on the live
+  // site; build and runtime errors still pop up during development.
+  devIndicators: false,
   turbopack: {
     rules: {
       "*.css": {
