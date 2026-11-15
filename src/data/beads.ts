@@ -1,6 +1,7 @@
 // Rudraksha beads. Prices in rupees, from products.xlsx.
 // Traditional associations (deity, planet, mantra) follow the design; Dr. Panduranga Rao Garu
 // checks them before launch. A `null` planet or mantra hides that row on the bead page.
+import { asset } from "@/lib/asset";
 
 export type BeadSize = "normal" | "collector";
 export type BeadShape = "single" | "gs" | "ggs" | "ganesh";
@@ -73,7 +74,7 @@ const mukhiBeads: Bead[] = MUKHI.map(([n, numeral, hi, deity, planet, mantra, pu
   lines: n,
   shape: "single",
   prices: { normal, collector },
-  photos: [`/images/beads/${n}-mukhi.webp`],
+  photos: [asset(`/images/beads/${n}-mukhi.webp`)],
   available: true,
 }));
 
@@ -96,7 +97,7 @@ const rareBeads: Bead[] = [
     lines: 6,
     shape: "gs",
     prices: null,
-    photos: ["/images/beads/gauri-shankar.webp"],
+    photos: [asset("/images/beads/gauri-shankar.webp")],
     available: true,
   },
   {
@@ -138,7 +139,7 @@ const rareBeads: Bead[] = [
     lines: 5,
     shape: "ganesh",
     prices: null,
-    photos: ["/images/beads/ganesh.webp"],
+    photos: [asset("/images/beads/ganesh.webp")],
     available: true,
   },
 ];

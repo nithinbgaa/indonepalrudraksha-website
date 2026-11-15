@@ -10,6 +10,7 @@ import { founderBio, publishedFounderSlides as slides } from "@/data/founder";
 import { site } from "@/data/site";
 import { useReducedMotion } from "@/lib/client-store";
 import { ArrowButtons } from "./rail";
+import { asset } from "@/lib/asset";
 
 export function FounderCarousel() {
   const rail = useRef<HTMLDivElement>(null);
@@ -104,7 +105,7 @@ export function FounderCarousel() {
               <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-[22px] border border-edge bg-[rgba(0,0,0,0.35)] shadow-[0_0_36px_rgba(120,190,235,0.15)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={`/images/founder/${s.id}.webp`}
+                  src={asset(`/images/founder/${s.id}.webp`)}
                   alt={`${site.founder.name} — ${s.caption}`}
                   loading={visible && k <= i + 2 ? "eager" : "lazy"}
                   className="size-full object-contain"
@@ -132,7 +133,7 @@ export function FounderCarousel() {
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/images/founder/${s.id}.webp`} alt="" loading="lazy" className="size-full object-cover" />
+              <img src={asset(`/images/founder/${s.id}.webp`)} alt="" loading="lazy" className="size-full object-cover" />
             </button>
           ))}
         </div>

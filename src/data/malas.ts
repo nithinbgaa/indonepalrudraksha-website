@@ -1,5 +1,6 @@
 // Malas and bracelets. No prices are shown: each has an "Ask for price" WhatsApp button.
 // A `null` detail hides that row on the page. Fill them in as the business confirms them.
+import { asset } from "@/lib/asset";
 
 export interface MalaItem {
   slug: string;
@@ -47,7 +48,7 @@ export const malas: MalaItem[] = [
     about:
       "A Siddha Mala crowned with a round 1 Mukhi bead, capped and strung by hand. Ask us on WhatsApp for the composition and the current price.",
     madeOf: "Siddha Mala with a round 1 Mukhi bead",
-    photos: ["/images/malas/siddha-mala-1-mukhi-round.webp"],
+    photos: [asset("/images/malas/siddha-mala-1-mukhi-round.webp")],
   }),
   mala({
     slug: "maha-mrityunjaya-mala",
@@ -57,7 +58,7 @@ export const malas: MalaItem[] = [
     line: "Strung for the Maha Mrityunjaya mantra",
     about:
       "A Rudraksha mala with a sacred pendant, strung for chanting the Maha Mrityunjaya mantra. Ask us on WhatsApp for the composition and the current price.",
-    photos: ["/images/malas/maha-mrityunjaya-mala.webp"],
+    photos: [asset("/images/malas/maha-mrityunjaya-mala.webp")],
   }),
   mala({
     slug: "srikanta-mala",
@@ -67,7 +68,7 @@ export const malas: MalaItem[] = [
     line: "Rudraksha with a sacred pendant",
     about:
       "A Rudraksha mala finished with a sacred pendant. Ask us on WhatsApp for the composition and the current price.",
-    photos: ["/images/malas/srikanta-mala.webp"],
+    photos: [asset("/images/malas/srikanta-mala.webp")],
   }),
   mala({
     slug: "ugra-narayana-mala",
@@ -76,14 +77,14 @@ export const malas: MalaItem[] = [
     pendant: true,
     line: "A mala with a sacred pendant",
     about: "A mala finished with a sacred pendant. Ask us on WhatsApp for the composition and the current price.",
-    photos: ["/images/malas/ugra-narayana-mala.webp"],
+    photos: [asset("/images/malas/ugra-narayana-mala.webp")],
   }),
   mala({
     slug: "patri-mala",
     title: "Patri Mala",
     line: "Hand-strung for japa and daily wear",
     about: "A hand-strung mala for japa and daily wear. Ask us on WhatsApp for the composition and the current price.",
-    photos: ["/images/malas/patri-mala.webp"],
+    photos: [asset("/images/malas/patri-mala.webp")],
   }),
   mala({
     slug: "japa-mala-6mm",
@@ -94,7 +95,7 @@ export const malas: MalaItem[] = [
       "A Rudraksha japa mala of small 6 mm beads, light enough to carry for daily chanting. Ask us on WhatsApp for the current price.",
     madeOf: "Rudraksha, 6 mm beads",
     purpose: "Daily japa and meditation",
-    photos: ["/images/malas/japa-mala-6mm.webp"],
+    photos: [asset("/images/malas/japa-mala-6mm.webp")],
   }),
   mala({
     slug: "karungali-mala",
@@ -106,7 +107,7 @@ export const malas: MalaItem[] = [
       "A mala of polished Karungali, the black ebony wood traditionally worn in South India. Choose a bead size and ask us on WhatsApp for the current price.",
     madeOf: "Karungali (black ebony)",
     sizes: ["6 mm", "7 mm", "8 mm"],
-    photos: ["/images/malas/karungali-mala.webp"],
+    photos: [asset("/images/malas/karungali-mala.webp")],
   }),
 ];
 

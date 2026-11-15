@@ -10,6 +10,7 @@ import Link from "next/link";
 
 import { memo, useEffect, useRef, useState } from "react";
 import { LINGAM_SVG } from "@/components/art/lingam-markup";
+import { asset } from "@/lib/asset";
 
 const Lingam = memo(function Lingam() {
   const ref = useRef<HTMLDivElement>(null);
@@ -332,7 +333,7 @@ export function Hero() {
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/shiva-painting.webp"
+            src={asset("/images/shiva-painting.webp")}
             alt="Chalk painting of Lord Shiva in meditation, eyes closed, a crescent moon in his hair and a trishul beside him"
             className="relative block size-full object-cover"
             style={{
