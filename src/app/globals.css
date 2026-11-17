@@ -81,12 +81,12 @@
   }
 }
 
-/* Scroll-driven hero: a frame one screen tall, scrolled through 3.2 more screens. */
+/* Scroll-driven hero: a frame one screen tall, scrolled through 1.5 more screens. */
 .hero-frame {
   height: clamp(600px, 100vh, 920px);
 }
 .hero-tall {
-  height: calc(clamp(600px, 100vh, 920px) * 4.2);
+  height: calc(clamp(600px, 100vh, 920px) * 2.5);
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-tall {

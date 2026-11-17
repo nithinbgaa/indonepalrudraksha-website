@@ -34,6 +34,9 @@ Domain: https://indonepalrudrakshaorganisation.in. Maintained by Rado for IndoNe
 - `src/data/malas.ts` — malas and bracelets. `null` details are hidden on the page.
 - `src/data/founder.ts` — founder slides. Only `published: true` slides appear.
 - `src/components/home/hero.tsx` — scroll-driven hero, a port of design/source/Hero.dc.html. Keep the timing maths.
+  The section is 2.5 screens tall (1.5 screens of scrolling, `.hero-tall` in globals.css). Each frame writes only
+  `transform`/`opacity` through refs (no React re-render), and the drawn progress eases towards the scroll position.
+  Keep it that way: no `left`/`top`/`width`/`filter` changes per frame, no blend modes.
 - `src/components/art/` — drawn Rudraksha (rotating), mala, Shivalinga (generated `lingam-markup.ts`).
 - `public/images/` — web-sized photos made by `npm run images -- <content folder>` (sharp → WebP).
 - Design source: `~/Desktop/IndoNepal-Website/design/` (DESIGN-BRIEF.md, `source/*.dc.html`, `screens/`).
