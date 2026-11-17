@@ -1,0 +1,13 @@
+// Cloudflare deploy settings. The site is plain files: `npm run build` writes them to ./out and
+// `npx wrangler deploy` uploads that folder. No server code runs (no "main" script).
+{
+  "name": "indonepalrudraksha-website",
+  "compatibility_date": "2026-11-16",
+  "assets": {
+    "directory": "./out",
+    // unknown addresses get out/404.html with a real 404 status
+    "not_found_handling": "404-page",
+    // pages live at /folder/index.html; /folder is redirected to /folder/
+    "html_handling": "auto-trailing-slash"
+  }
+}
