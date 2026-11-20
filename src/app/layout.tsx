@@ -14,6 +14,7 @@ import "./globals.css";
 import { site } from "@/data/site";
 import { CartProvider } from "@/lib/cart";
 import { CartPanel } from "@/components/cart/cart-panel";
+import { ConsentManager } from "@/components/layout/consent";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
           <CartPanel />
         </CartProvider>
+        <ConsentManager />
       </body>
     </html>
   );

@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { useLocal } from "@/lib/client-store";
+import { CONSENT_KEY, trackConversion } from "@/lib/ads";
 import { consultation, site } from "@/data/site";
 import { whatsappLink } from "@/lib/format";
 import { CONSULT_KEY, type ChosenSlot } from "@/lib/slots";
@@ -10,6 +12,19 @@ import { Check, WhatsAppIcon } from "@/components/ui/icons";
 
 export function ThankYou() {
   const raw = useLocal(CONSULT_KEY);
+  const consent = useLocal(CONSENT_KEY);
+
+  // Count the paid consultation for Google Ads once per payment (only if the visitor accepted cookies).
+  useEffect(() => {
+    if (consent !== "granted") return;
+    const id = new URLSearchParams(window.location.search).get("razorpay_payment_id") ?? "";
+    const key = `inr-consult-paid:${id}`;
+    try {
+      if (window.sessionStorage.getItem(key)) return;
+      window.sessionStorage.setItem(key, "1");
+    } catch {}
+    trackConversion("consultPaid", { value: consultation.fee, currency: "INR", ...(id ? { transaction_id: id } : {}) });
+  }, [consent]);
   let chosen: ChosenSlot | null = null;
   try {
     const v = JSON.parse(raw || "null");
@@ -35,6 +50,7 @@ export function ThankYou() {
       </p>
       <a
         href={whatsappLink(bookingMessage(chosen, true))}
+        data-conversion="none"
         target="_blank"
         rel="noopener"
         className="mt-2 flex min-h-[52px] items-center gap-2.5 rounded-full bg-saffron px-7 text-[17px] font-semibold text-on-saffron no-underline hover:text-on-saffron"

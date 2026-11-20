@@ -45,8 +45,9 @@ export default function ContactPage() {
       <p>[Days and hours when the team replies on WhatsApp, e.g. Monday to Saturday, 10 AM – 7 PM IST.]</p>
       <h2>Grievance officer</h2>
       <p>
-        Under the Consumer Protection (E-Commerce) Rules, 2020: [Name], [designation], {site.email}. We acknowledge
-        complaints within 48 hours and resolve them within one month.
+        Under the Consumer Protection (E-Commerce) Rules, 2020: {site.grievanceOfficer.name},{" "}
+        {site.grievanceOfficer.designation}, {site.email}. We acknowledge complaints within 48 hours and resolve them
+        within one month.
       </p>
     </TextPage>
   );

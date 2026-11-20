@@ -133,7 +133,12 @@ export function FounderCarousel() {
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={asset(`/images/founder/${s.id}.webp`)} alt="" loading="lazy" className="size-full object-cover" />
+              <img
+                src={asset(`/images/founder/${s.id}.webp`)}
+                alt=""
+                loading="lazy"
+                className="size-full object-cover"
+              />
             </button>
           ))}
         </div>

@@ -18,6 +18,26 @@ export const site = {
     "Hyderabad, Telangana 500033",
   ],
 
+  // The legal business behind the site, from the GST registration certificate (REG-06).
+  legal: {
+    name: "Gullipalli Panduranga Rao",
+    type: "sole proprietorship",
+    tradeName: "Indo Nepal Rudraksha Organisation",
+    gstin: "36AGOPG1245R1ZW",
+    // Principal place of business on the GST certificate.
+    registeredOffice: [
+      "Flat No. G10 B, 6-3-252, Dhruvatara Complex",
+      "Medinova Compound, Somajiguda",
+      "Hyderabad, Telangana 500082",
+    ],
+  },
+
+  // Grievance officer (Consumer Protection (E-Commerce) Rules, 2020 and DPDP Act, 2023).
+  grievanceOfficer: {
+    name: "Gullipalli Panduranga Rao (Dr. Panduranga Rao Garu)",
+    designation: "Proprietor",
+  },
+
   founder: {
     name: "Dr. Panduranga Rao Garu",
     shortName: "Panduranga Rao Garu",
@@ -54,4 +74,21 @@ export const consultation = {
   razorpayButtonId: "",
   // Shown after payment: "We'll confirm your slot on WhatsApp within … hours".
   confirmWithinHours: "[X]",
+};
+
+// Google Ads. While `googleAdsId` is empty the site loads no Google tag and shows no cookie banner.
+// With an id, visitors see an Accept / Decline banner and the tag loads only after Accept.
+export const ads = {
+  // Google Ads → the tools icon → Data manager → Google tag, e.g. "AW-123456789".
+  googleAdsId: "",
+  // Conversion labels (the part after the slash in "AW-123456789/AbCdEfGh"), from
+  // Google Ads → Goals → Conversions → the action → Tag setup → Install the tag yourself.
+  // Empty = that action is not counted.
+  conversions: {
+    order: "", // "Place order on WhatsApp" in the cart
+    askPrice: "", // "Ask for price" on malas, bracelets and rare beads
+    consultRequest: "", // "Book on WhatsApp" in the consultation card
+    consultPaid: "", // the thank-you page after a Razorpay consultation payment
+    whatsapp: "", // any other WhatsApp chat link
+  },
 };

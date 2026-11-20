@@ -9,10 +9,57 @@ import { Collection } from "@/components/home/collection";
 import { MalaCollection } from "@/components/home/malas";
 import { ConsultSection } from "@/components/home/consult-section";
 import { FounderCarousel } from "@/components/home/founder";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  // People search for the organisation's full name, so the homepage title carries it.
+  title: { absolute: `${site.name} Organisation — Genuine Nepali Rudraksha, 1 to 16 Mukhi` },
+};
+
+// Business details for search engines (Google uses `name`/`alternateName` for the site name).
+const names = ["Indo Nepal Rudraksha Organisation", "IndoNepal Rudraksha Organisation", "Indo Nepal Rudraksha"];
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    alternateName: names,
+    url: `${site.url}/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "@id": `${site.url}/#store`,
+    name: site.name,
+    alternateName: names,
+    legalName: site.legal.name,
+    url: `${site.url}/`,
+    description: site.description,
+    image: `${site.url}/images/shiva-painting.webp`,
+    telephone: site.whatsappDisplay.replace(/ /g, ""),
+    email: site.email,
+    taxID: site.legal.gstin,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: `${site.address[0]}, ${site.address[1]}`,
+      addressLocality: "Hyderabad",
+      addressRegion: "Telangana",
+      postalCode: "500033",
+      addressCountry: "IN",
+    },
+    founder: { "@type": "Person", name: "Dr. Panduranga Rao" },
+    currenciesAccepted: "INR",
+    paymentAccepted: "UPI, credit card, debit card, net banking",
+  },
+];
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <SiteHeader />
       <main id="main">
         <noscript>

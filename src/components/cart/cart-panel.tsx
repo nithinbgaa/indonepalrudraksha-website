@@ -11,6 +11,7 @@ import { useCart } from "@/lib/cart";
 import { mukhi, sizeLabel, type BeadSize } from "@/data/beads";
 import { site } from "@/data/site";
 import { inr, newOrderNumber, plural, whatsappLink } from "@/lib/format";
+import { trackConversion } from "@/lib/ads";
 import { Modal } from "@/components/ui/drawer";
 import { Check, Close, Minus, Plus, Trash, WhatsAppIcon } from "@/components/ui/icons";
 
@@ -64,6 +65,7 @@ export function CartPanel() {
     setPlaced({ order, link, count: cart.count });
     cart.clear();
     setGst(false);
+    trackConversion("order", { transaction_id: order, value: cart.total, currency: "INR" });
     window.open(link, "_blank", "noopener");
   };
 
@@ -251,6 +253,7 @@ export function CartPanel() {
             </span>
             <a
               href={placed.link}
+              data-conversion="none"
               target="_blank"
               rel="noopener"
               className="flex min-h-12 items-center gap-2 rounded-full bg-saffron px-6 font-semibold text-on-saffron no-underline hover:text-on-saffron"

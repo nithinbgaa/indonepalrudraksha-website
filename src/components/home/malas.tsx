@@ -87,6 +87,7 @@ export function MalaCollection() {
             <div className="mt-auto flex w-full items-center justify-between gap-2 border-t border-hairline pt-3.5">
               <a
                 href={whatsappLink(askPriceMessage(m.title))}
+                data-conversion="askPrice"
                 target="_blank"
                 rel="noopener"
                 aria-label={`Ask for the price of the ${m.title} on WhatsApp`}

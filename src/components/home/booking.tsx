@@ -275,6 +275,7 @@ export function Booking() {
               </p>
               <a
                 href={whatsappLink(bookingMessage(chosen, false))}
+                data-conversion="consultRequest"
                 target="_blank"
                 rel="noopener"
                 className="flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-saffron text-[17px] font-semibold text-on-saffron no-underline hover:text-on-saffron"

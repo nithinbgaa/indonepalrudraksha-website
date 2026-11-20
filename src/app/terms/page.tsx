@@ -10,9 +10,10 @@ export const metadata: Metadata = {
 
 export default function Terms() {
   return (
-    <TextPage eyebrow="Legal" title="Terms of use" updated="[date]">
+    <TextPage eyebrow="Legal" title="Terms of use" updated="20 November 2026">
       <p>
-        This website is run by [legal name of the business], [business type], GSTIN [GSTIN], with its address at{" "}
+        This website is run by {site.legal.name}, a {site.legal.type} trading as {site.legal.tradeName} ({site.name}),
+        GSTIN {site.legal.gstin}, registered at {site.legal.registeredOffice.join(", ")}, with a place of business at{" "}
         {site.address.join(", ")} (“we”, “us”). By using it or ordering from us you agree to these terms.
       </p>
       <h2>Products</h2>

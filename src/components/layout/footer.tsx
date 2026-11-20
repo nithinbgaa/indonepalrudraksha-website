@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/data/site";
 import { whatsappLink } from "@/lib/format";
+import { CookieSettingsButton } from "./consent";
 
 const link = "flex min-h-11 items-center text-body no-underline hover:text-heading lg:min-h-0 lg:py-0.5";
 
@@ -59,6 +60,9 @@ export function SiteFooter() {
             <Link href="/privacy/" className={link}>
               Privacy policy
             </Link>
+            <CookieSettingsButton
+              className={`${link} cursor-pointer border-0 bg-transparent p-0 text-left text-[15px]`}
+            />
           </nav>
           <div className="col-span-2 flex flex-col gap-2 text-[15px] lg:col-span-1">
             <span className="text-[13px] tracking-[0.2em] text-line uppercase">Contact</span>

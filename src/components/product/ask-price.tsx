@@ -48,6 +48,7 @@ export function AskPrice({ name, sizes = [], consultText }: { name: string; size
         <a
           ref={mainLink}
           href={href}
+          data-conversion="askPrice"
           target="_blank"
           rel="noopener"
           className="flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-saffron text-lg font-semibold text-on-saffron no-underline shadow-[0_0_24px_rgba(120,190,235,0.25)] hover:bg-[#EBAA63] hover:text-on-saffron"
@@ -73,6 +74,7 @@ export function AskPrice({ name, sizes = [], consultText }: { name: string; size
         </span>
         <a
           href={href}
+          data-conversion="askPrice"
           target="_blank"
           rel="noopener"
           className="flex min-h-12 flex-none items-center gap-2 rounded-full bg-saffron px-5 text-base font-semibold text-on-saffron no-underline hover:text-on-saffron"
