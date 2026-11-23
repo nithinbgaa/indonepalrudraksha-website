@@ -57,8 +57,8 @@ export function AskPrice({ name, sizes = [], consultText }: { name: string; size
           Ask for price on WhatsApp
         </a>
         <span className="text-sm text-muted">
-          We reply with today&apos;s price and availability, then send a secure Razorpay link to pay by UPI, card or
-          EMI.
+          We reply with today&apos;s price and availability, then share our payment details to pay by UPI or bank
+          transfer.
         </span>
         <Link
           href="/consultation/"

@@ -36,7 +36,7 @@ const jsonLd = [
     url: `${site.url}/`,
     description: site.description,
     image: `${site.url}/images/shiva-painting.webp`,
-    telephone: site.whatsappDisplay.replace(/ /g, ""),
+    telephone: site.phone,
     email: site.email,
     taxID: site.legal.gstin,
     address: {
@@ -49,7 +49,7 @@ const jsonLd = [
     },
     founder: { "@type": "Person", name: "Dr. Panduranga Rao" },
     currenciesAccepted: "INR",
-    paymentAccepted: "UPI, credit card, debit card, net banking",
+    paymentAccepted: "UPI, bank transfer",
   },
 ];
 
@@ -78,8 +78,8 @@ export default function Home() {
               },
               {
                 icon: <Shield size={28} className="flex-none text-line" />,
-                title: "Certified",
-                text: site.assurances.certified,
+                title: "Checked",
+                text: site.assurances.checked,
               },
               {
                 icon: <Truck size={28} className="flex-none text-line" />,
@@ -184,7 +184,7 @@ export default function Home() {
                 [
                   "II",
                   "Checked bead by bead",
-                  "Every mukhi is counted and checked, and a certificate of authenticity goes in your box.",
+                  "Every bead is examined by hand and its mukhi counted before it is packed for you.",
                 ],
                 [
                   "III",

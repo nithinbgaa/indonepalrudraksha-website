@@ -130,7 +130,7 @@ export function Booking() {
         </div>
 
         <p className="mt-4 mb-0 text-[15px] leading-relaxed text-body">
-          After three decades of guiding millions, {site.founder.name} still reads every chart himself — and only ten a
+          After three decades of guiding people, {site.founder.name} still reads every chart himself — and only ten a
           day, so each reading gets his full, unhurried attention. When a day&apos;s ten are taken, the next opening may
           be days away.
         </p>
@@ -271,7 +271,7 @@ export function Booking() {
             <div className="flex flex-col gap-4">
               <p className="m-0 text-body">
                 Send us your preferred slot on WhatsApp with your date, time and place of birth. We confirm the slot and
-                send a secure link to pay {inr(consultation.fee)} by UPI or card.
+                share our payment details to pay {inr(consultation.fee)} by UPI or bank transfer.
               </p>
               <a
                 href={whatsappLink(bookingMessage(chosen, false))}

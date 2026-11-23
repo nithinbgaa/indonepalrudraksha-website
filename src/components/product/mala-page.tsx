@@ -55,10 +55,7 @@ export function MalaPage({ m }: { m: MalaItem }) {
             <span className="font-display text-[30px] text-heading">
               {m.available ? "Price on request" : "Currently unavailable"}
             </span>
-            <span className="text-sm text-muted">
-              per {m.form}
-              {kar ? "" : " · certificate included"}
-            </span>
+            <span className="text-sm text-muted">per {m.form}</span>
           </div>
           <p className="m-0 text-pretty text-body">{m.about}</p>
           {rows.length > 0 && <Details rows={rows} />}

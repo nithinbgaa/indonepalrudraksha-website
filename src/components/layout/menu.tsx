@@ -8,7 +8,7 @@ import { useState } from "react";
 import { site } from "@/data/site";
 import { whatsappLink } from "@/lib/format";
 import { Modal } from "@/components/ui/drawer";
-import { ChevronRight, Close, WhatsAppIcon } from "@/components/ui/icons";
+import { ChevronRight, Close, PhoneIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { SearchButton } from "./search";
 
 export interface NavItem {
@@ -111,6 +111,13 @@ export function MenuButton({ items }: { items: NavItem[] }) {
             >
               <WhatsAppIcon size={18} />
               WhatsApp {site.whatsappDisplay}
+            </a>
+            <a
+              href={`tel:${site.phone}`}
+              className="flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-edge text-[17px] text-heading no-underline hover:border-chalk"
+            >
+              <PhoneIcon size={18} />
+              Call {site.phoneDisplay}
             </a>
             <span lang="sa" className="pt-2 text-center font-deva text-lg text-line">
               ॐ नमः शिवाय

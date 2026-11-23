@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Refunds() {
   return (
-    <TextPage eyebrow="Help" title="Cancellation and refunds" updated="[date]">
+    <TextPage eyebrow="Help" title="Cancellation and refunds" updated="23 November 2026">
       <h2>Orders</h2>
       <ul>
         <li>
@@ -29,20 +29,18 @@ export default function Refunds() {
           Your chosen time is a preference. We confirm it on WhatsApp within {consultation.confirmWithinHours} hours. If
           it is no longer free, we offer another time; if none suits you, we refund the full {inr(consultation.fee)}.
         </li>
-        <li>To reschedule, message us on WhatsApp at least [X] hours before your slot.</li>
+        <li>To reschedule, message us on WhatsApp at least {consultation.rescheduleHours} hours before your slot.</li>
         <li>
-          [Cancellation by you: full refund if cancelled at least X hours before the slot; no refund for missed calls.]
+          If you cancel at least {consultation.cancelHours} hours before your slot, we refund you in full. Later
+          cancellations and missed calls are not refunded.
         </li>
         <li>If we need to cancel, you can choose a new time or a full refund.</li>
       </ul>
       <h2>How refunds are paid</h2>
+      <p>Approved refunds are paid to the UPI ID or bank account you paid from, within 5–7 working days of approval.</p>
       <p>
-        Refunds are made through Razorpay to the original payment method (UPI, card or bank), usually within 5–7 working
-        days of approval, depending on your bank.
-      </p>
-      <p>
-        To ask for a cancellation or refund: WhatsApp {site.whatsappDisplay} or email{" "}
-        <a href={`mailto:${site.email}`}>{site.email}</a> with your order number or payment ID.
+        To ask for a cancellation or refund: call or WhatsApp {site.phoneDisplay} or email{" "}
+        <a href={`mailto:${site.email}`}>{site.email}</a> with your order number or payment reference.
       </p>
     </TextPage>
   );

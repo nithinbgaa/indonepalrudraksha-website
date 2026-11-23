@@ -536,7 +536,7 @@ export function Hero() {
             style={{ ...layer, opacity: 0 }}
           >
             Tradition says the first Rudraksha grew from Lord Shiva&apos;s tears. Ours come from Nepal — 1 to 16 Mukhi
-            and rare beads, chosen one by one and sent with a certificate of authenticity.
+            and rare beads, chosen and checked one by one.
           </p>
           <div
             ref={(el) => {

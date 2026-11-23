@@ -6,11 +6,15 @@ export const site = {
   name: "IndoNepal Rudraksha",
   url: "https://indonepalrudrakshaorganisation.in",
   description:
-    "Genuine Nepali Rudraksha, 1 to 16 Mukhi, rare beads, malas and bracelets, each with a certificate of authenticity. Horoscope consultations with Dr. Panduranga Rao Garu.",
+    "Genuine Nepali Rudraksha, 1 to 16 Mukhi, rare beads, malas and bracelets, checked bead by bead. Horoscope consultations with Dr. Panduranga Rao Garu.",
 
   // WhatsApp Business number for orders, mala prices and consultations.
   whatsapp: "919177778852", // country code + number, digits only (used in wa.me links)
   whatsappDisplay: "+91 91777 78852",
+  // Phone for calls (same number). Must stay on the site: Google checks call-ad numbers against it.
+  phone: "+919177778852",
+  phoneDisplay: "+91 91777 78852",
+  hours: "Monday to Saturday, 10 AM – 7 PM IST",
   email: "info@indonepalrudrakshaorganisation.in",
   address: [
     "Plot No. 1057/A, Bilwa-45",
@@ -44,13 +48,13 @@ export const site = {
     title: "Rudraksha Philosopher · Vedic Mathematics Scholar",
   },
 
-  // Second half of the top announcement bar. Leave empty to show only "Genuine Rudraksha from Nepal".
-  announcement: "Certificate of authenticity with every bead",
+  // Second half of the top announcement bar (the phone number is added after it).
+  announcement: "Call or WhatsApp",
 
   // Trust strip under the hero.
   assurances: {
     origin: "every bead sourced from Nepal",
-    certified: "certificate of authenticity with every bead",
+    checked: "every bead checked by hand before it is sent",
     delivery: "shipped across India, and abroad on request",
   },
 
@@ -61,7 +65,6 @@ export const consultation = {
   fee: 500,
   durationMinutes: 30,
   // 10 slots a day, IST, as minutes from midnight. 11:00 AM – 6:00 PM with a break 1:30–3:30 PM.
-  // [Confirm the exact times with the business.]
   slots: [660, 690, 720, 750, 780, 930, 960, 990, 1020, 1050],
   hoursLabel: "11:00 AM – 6:00 PM IST",
   // Days with no consultations, 0 = Sunday … 6 = Saturday.
@@ -73,7 +76,9 @@ export const consultation = {
   // Razorpay Payment Button id (starts with pl_). Empty = show "Book on WhatsApp" instead.
   razorpayButtonId: "",
   // Shown after payment: "We'll confirm your slot on WhatsApp within … hours".
-  confirmWithinHours: "[X]",
+  confirmWithinHours: "12",
+  rescheduleHours: 12, // reschedule at least this many hours before the slot
+  cancelHours: 24, // full refund if cancelled at least this many hours before
 };
 
 // Google Ads. While `googleAdsId` is empty the site loads no Google tag and shows no cookie banner.

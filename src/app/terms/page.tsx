@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Terms() {
   return (
-    <TextPage eyebrow="Legal" title="Terms of use" updated="20 November 2026">
+    <TextPage eyebrow="Legal" title="Terms of use" updated="23 November 2026">
       <p>
         This website is run by {site.legal.name}, a {site.legal.type} trading as {site.legal.tradeName} ({site.name}),
         GSTIN {site.legal.gstin}, registered at {site.legal.registeredOffice.join(", ")}, with a place of business at{" "}
@@ -21,14 +21,15 @@ export default function Terms() {
         <li>
           Rudraksha are natural; each bead differs slightly in size, shape and colour from the drawings and photos.
         </li>
-        <li>Prices are in Indian rupees and [include / exclude] GST. Delivery charges are confirmed before payment.</li>
+        <li>Prices are in Indian rupees and include GST. Delivery charges are confirmed before payment.</li>
         <li>Prices of malas, bracelets and rare beads are given on request and confirmed on WhatsApp.</li>
         <li>An order is accepted only when we confirm it on WhatsApp and you complete payment.</li>
       </ul>
       <h2>Payments</h2>
       <p>
-        Payments are processed by Razorpay. We do not see or store your card or bank details. We do not offer cash on
-        delivery.
+        After we confirm your order or booking on WhatsApp, we share our payment details. You pay by UPI or bank
+        transfer directly to our business account. We never ask for your card number, PIN or OTP. We do not offer cash
+        on delivery.
       </p>
       <h2>Consultations</h2>
       <p>

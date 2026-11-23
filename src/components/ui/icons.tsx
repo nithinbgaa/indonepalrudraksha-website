@@ -24,6 +24,11 @@ export const ArrowRight = (p: P) => svg(<path d="M5 12h14M13 6l6 6-6 6" />, { st
 export const Minus = (p: P) => svg(<path d="M6 12h12" />, { strokeWidth: 2, ...p });
 export const Plus = (p: P) => svg(<path d="M6 12h12M12 6v12" />, { strokeWidth: 2, ...p });
 export const Close = (p: P) => svg(<path d="M6 6l12 12M18 6L6 18" />, p);
+export const PhoneIcon = (p: P) =>
+  svg(
+    <path d="M5 4h3.5l1.6 4.2-2.2 1.4a11 11 0 0 0 6.5 6.5l1.4-2.2L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z" />,
+    p,
+  );
 export const Check = (p: P) => svg(<path d="M5 12.5l4.5 4.5L19 7.5" />, p);
 export const Search = (p: P) =>
   svg(

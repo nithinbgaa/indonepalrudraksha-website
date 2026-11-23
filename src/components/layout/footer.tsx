@@ -43,7 +43,7 @@ export function SiteFooter() {
           <nav aria-label="Help" className="flex flex-col text-[15px] lg:gap-2">
             <span className="text-[13px] tracking-[0.2em] text-line uppercase">Help</span>
             <Link href="/#promise" className={link}>
-              Authenticity
+              Our promise
             </Link>
             <Link href="/how-to-wear/" className={link}>
               How to wear Rudraksha
@@ -66,9 +66,13 @@ export function SiteFooter() {
           </nav>
           <div className="col-span-2 flex flex-col gap-2 text-[15px] lg:col-span-1">
             <span className="text-[13px] tracking-[0.2em] text-line uppercase">Contact</span>
+            <a href={`tel:${site.phone}`} className={link}>
+              Call {site.phoneDisplay}
+            </a>
             <a href={whatsappLink()} target="_blank" rel="noopener" className={link}>
               WhatsApp {site.whatsappDisplay}
             </a>
+            <span className="text-muted">{site.hours}</span>
             <a href={`mailto:${site.email}`} className={`${link} break-all`}>
               {site.email}
             </a>
@@ -81,6 +85,11 @@ export function SiteFooter() {
             </address>
           </div>
         </div>
+        <p className="m-0 max-w-[900px] text-[13px] leading-normal text-muted">
+          Rudraksha, mantras and astrology are traditional spiritual practices. Descriptions of deities, planets and
+          benefits reflect traditional belief; we do not promise any particular result, and a consultation is not a
+          substitute for medical, legal or financial advice.
+        </p>
         <div className="flex flex-wrap justify-between gap-3 border-t border-[rgba(142,195,224,0.18)] pt-6 text-sm text-muted">
           <span>
             © {new Date().getFullYear()} {site.name}

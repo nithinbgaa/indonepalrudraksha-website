@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { site } from "@/data/site";
 import { whatsappLink } from "@/lib/format";
 import { TextPage } from "@/components/layout/text-page";
-import { WhatsAppIcon } from "@/components/ui/icons";
+import { PhoneIcon, WhatsAppIcon } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
   title: "Contact us",
-  description: `WhatsApp ${site.whatsappDisplay}, email ${site.email}. ${site.address.join(", ")}.`,
+  description: `Call or WhatsApp ${site.phoneDisplay}, email ${site.email}. ${site.address.join(", ")}.`,
   alternates: { canonical: "/contact/" },
 };
 
@@ -15,14 +15,21 @@ export default function ContactPage() {
     <TextPage
       eyebrow="Contact"
       title="Speak with us"
-      intro="For orders, mala prices, consultations or help choosing a bead, WhatsApp is the quickest way to reach us."
+      intro="For orders, mala prices, consultations or help choosing a bead, call us or message us on WhatsApp."
     >
-      <div className="not-prose flex flex-col gap-4">
+      <div className="not-prose flex flex-wrap gap-3">
+        <a
+          href={`tel:${site.phone}`}
+          className="flex min-h-[52px] w-fit items-center gap-2.5 rounded-full border border-chalk px-7 text-[17px] font-semibold text-heading no-underline! hover:text-heading"
+        >
+          <PhoneIcon size={20} />
+          Call {site.phoneDisplay}
+        </a>
         <a
           href={whatsappLink("Namaste! I have a question.")}
           target="_blank"
           rel="noopener"
-          className="flex min-h-[52px] w-fit items-center gap-2.5 rounded-full bg-saffron px-7 text-[17px] font-semibold text-on-saffron no-underline hover:text-on-saffron"
+          className="flex min-h-[52px] w-fit items-center gap-2.5 rounded-full bg-saffron px-7 text-[17px] font-semibold text-on-saffron no-underline! hover:text-on-saffron"
         >
           <WhatsAppIcon size={20} />
           WhatsApp {site.whatsappDisplay}
@@ -42,7 +49,7 @@ export default function ContactPage() {
         ))}
       </address>
       <h2>Hours</h2>
-      <p>[Days and hours when the team replies on WhatsApp, e.g. Monday to Saturday, 10 AM – 7 PM IST.]</p>
+      <p>Calls and WhatsApp: {site.hours}. Messages sent outside these hours are answered the next working day.</p>
       <h2>Grievance officer</h2>
       <p>
         Under the Consumer Protection (E-Commerce) Rules, 2020: {site.grievanceOfficer.name},{" "}

@@ -56,7 +56,7 @@ export function CartPanel() {
       `Subtotal: ${inr(cart.total)}`,
       gst ? "GST invoice: Yes, I'll share my GSTIN." : "",
       "",
-      "Please confirm availability and send me the payment link.",
+      "Please confirm availability and send me the payment details.",
       "My name and delivery address (with PIN code):",
     ]
       .filter((x, i, a) => !(x === "" && a[i - 1] === ""))
@@ -212,8 +212,8 @@ export function CartPanel() {
                 <span className="font-display text-2xl text-heading">{inr(cart.total)}</span>
               </div>
               <span className="text-[13px] text-muted">
-                Every Rudraksha ships with its certificate of authenticity. We confirm your order on WhatsApp and send a
-                secure Razorpay link to pay by UPI, card or EMI.
+                We confirm your order and the delivery charge on WhatsApp, then share our payment details to pay by UPI
+                or bank transfer.
               </span>
               {cart.lines.length > 0 && (
                 <label className="flex min-h-11 cursor-pointer items-center gap-3 text-[15px] text-body">

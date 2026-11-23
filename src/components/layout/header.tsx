@@ -10,7 +10,7 @@ export const NAV = [
   { href: "/#malas", label: "Malas & Bracelets" },
   { href: "/#consult", label: "Horoscope Consultation" },
   { href: "/#founder", label: "Founder's Word" },
-  { href: "/#promise", label: "Authenticity" },
+  { href: "/#promise", label: "Our Promise" },
   { href: "/contact/", label: "Contact" },
 ];
 
@@ -44,7 +44,12 @@ export function Announcement() {
           <span className="hidden text-line sm:inline" aria-hidden="true">
             ·
           </span>
-          <span>{site.announcement}</span>
+          <span>
+            {site.announcement}{" "}
+            <a href={`tel:${site.phone}`} className="text-chalk no-underline hover:text-heading">
+              {site.phoneDisplay}
+            </a>
+          </span>
         </>
       )}
     </div>

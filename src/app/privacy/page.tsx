@@ -13,7 +13,7 @@ const ext = { target: "_blank", rel: "noopener" } as const;
 export default function Privacy() {
   const { legal, grievanceOfficer: go } = site;
   return (
-    <TextPage eyebrow="Legal" title="Privacy policy" updated="20 November 2026">
+    <TextPage eyebrow="Legal" title="Privacy policy" updated="23 November 2026">
       <p>
         This policy explains what personal data {site.name} collects through {site.url.replace("https://", "")}, on
         WhatsApp and by email, why we collect it, who we share it with, and your rights under India&apos;s Digital
@@ -36,11 +36,12 @@ export default function Privacy() {
         </li>
         <li>
           <strong>Consultations:</strong> your name, phone number, email, and your date, time and place of birth. You
-          enter these in the Razorpay payment form or send them to us on WhatsApp.
+          send these to us on WhatsApp.
         </li>
         <li>
-          <strong>Payments:</strong> handled by Razorpay. We receive the payment status, amount and payment ID, never
-          your full card or bank details.
+          <strong>Payments:</strong> you pay by UPI or bank transfer to our business account. We see your name, UPI ID
+          or account name, the amount and the transaction reference, as your bank shows them. We never ask for your card
+          number, PIN or OTP.
         </li>
         <li>
           <strong>This website:</strong> your cart and your cookie choice are kept only in your own browser (local
@@ -110,7 +111,7 @@ export default function Privacy() {
 
       <h2>Who we share it with</h2>
       <p>
-        Razorpay (payments), our courier partners (name, address and phone, for delivery), Meta&apos;s WhatsApp
+        Our bank (payments), our courier partners (name, address and phone, for delivery), Meta&apos;s WhatsApp
         (messaging), Google Workspace (email), Google Ads (only if you accept cookies), Cloudflare (website hosting),
         and authorities where the law requires. Some of these companies may process data outside India. We do not sell
         your data.
@@ -155,8 +156,8 @@ export default function Privacy() {
 
       <h2>Keeping your data safe</h2>
       <p>
-        The website is served only over an encrypted connection (HTTPS). Payments go through Razorpay&apos;s secure
-        checkout. Only the people who handle your order or consultation can see your details.
+        The website is served only over an encrypted connection (HTTPS). Payments go directly to our business bank
+        account. Only the people who handle your order or consultation can see your details.
       </p>
 
       <h2>Grievance officer</h2>

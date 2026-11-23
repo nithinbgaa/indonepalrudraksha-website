@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/rudraksha/[slug]"
   if (!b) return {};
   return {
     title: `${b.title} (${b.hiFull})`,
-    description: `${b.about} ${b.prices ? "Normal and Collector sizes, with a certificate of authenticity." : "A rare bead — ask us for the price."}`,
+    description: `${b.about} ${b.prices ? "Normal and Collector sizes." : "A rare bead — ask us for the price."}`,
     alternates: { canonical: `/rudraksha/${b.slug}/` },
     openGraph: b.photos[0] ? { images: [b.photos[0]] } : undefined,
   };
@@ -112,7 +112,7 @@ export default async function BeadPage({ params }: PageProps<"/rudraksha/[slug]"
   if (b.mantra) rows.push(["Beej mantra", b.mantra, "sa"]);
   rows.push(["Worn for", b.purpose], ["Origin", "Nepal"]);
   if (b.prices) rows.push(["Sizes", "Normal, or Collector (bigger)"]);
-  rows.push(["Certificate", "Authenticity certificate included"], ["Best day to wear", "Monday"]);
+  rows.push(["Best day to wear", "Monday"]);
 
   const wear = [
     "On a Monday morning after bathing, cleanse the bead with water or raw milk.",
@@ -168,7 +168,6 @@ export default async function BeadPage({ params }: PageProps<"/rudraksha/[slug]"
                 <span className="font-display text-[30px] text-heading">
                   {b.available ? "Price on request" : "Currently unavailable"}
                 </span>
-                <span className="text-sm text-muted">certificate included</span>
               </div>
               <p className="m-0 text-pretty text-body">{b.about}</p>
               <Details rows={rows} />
