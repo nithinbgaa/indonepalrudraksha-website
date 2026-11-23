@@ -27,7 +27,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: site.name,
-    images: [{ url: "/images/shiva-painting.webp", width: 1480, height: 533 }],
+    url: "/",
+    title: `${site.name} Organisation — Genuine Nepali Rudraksha`,
+    description: site.description,
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: `${site.name} — Genuine Nepali Rudraksha` }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og-image.jpg"] },
+  // Ownership checks for Google Search Console and Meta (set the codes in src/data/site.ts).
+  verification: {
+    ...(site.verification.google ? { google: site.verification.google } : {}),
+    ...(site.verification.facebook ? { other: { "facebook-domain-verification": site.verification.facebook } } : {}),
   },
   alternates: { canonical: "/" },
 };

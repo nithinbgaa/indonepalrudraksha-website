@@ -36,7 +36,9 @@ export function BeadPurchase({ slug, children }: { slug: string; children?: Reac
     <>
       <div className="flex flex-wrap items-baseline gap-3">
         <span className="font-display text-[30px] text-heading">{inr(price)}</span>
-        <span className="text-sm text-muted">per bead · {sizeLabel[size].toLowerCase()} size</span>
+        <span className="text-sm text-muted">
+          per bead · {sizeLabel[size].toLowerCase()} size{bead.certificate ? " · certificate included" : ""}
+        </span>
       </div>
 
       <p className="m-0 text-pretty text-body">{bead.about}</p>

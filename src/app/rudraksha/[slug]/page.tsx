@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/rudraksha/[slug]"
   if (!b) return {};
   return {
     title: `${b.title} (${b.hiFull})`,
-    description: `${b.about} ${b.prices ? "Normal and Collector sizes." : "A rare bead — ask us for the price."}`,
+    description: `${b.about} ${b.prices ? "Normal and Collector sizes." : "A rare bead — ask us for the price."}${b.certificate ? " Certificate of authenticity included." : ""}`,
     alternates: { canonical: `/rudraksha/${b.slug}/` },
     openGraph: b.photos[0] ? { images: [b.photos[0]] } : undefined,
   };
@@ -112,6 +112,7 @@ export default async function BeadPage({ params }: PageProps<"/rudraksha/[slug]"
   if (b.mantra) rows.push(["Beej mantra", b.mantra, "sa"]);
   rows.push(["Worn for", b.purpose], ["Origin", "Nepal"]);
   if (b.prices) rows.push(["Sizes", "Normal, or Collector (bigger)"]);
+  if (b.certificate) rows.push(["Certificate", "Certificate of authenticity included"]);
   rows.push(["Best day to wear", "Monday"]);
 
   const wear = [
@@ -120,24 +121,44 @@ export default async function BeadPage({ params }: PageProps<"/rudraksha/[slug]"
     "Wear it on a silk or wool thread, or set in silver or gold, so it touches the skin.",
   ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: b.title,
-    description: b.about,
-    image: b.photos.map((p) => site.url + p),
-    brand: { "@type": "Brand", name: site.name },
-    ...(b.prices && {
-      offers: {
-        "@type": "AggregateOffer",
-        priceCurrency: "INR",
-        lowPrice: b.prices.normal,
-        highPrice: b.prices.collector,
-        offerCount: 2,
-        availability: b.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-      },
-    }),
-  };
+  // Product and breadcrumb details for search engines. Prices must match the page exactly.
+  const url = `${site.url}/rudraksha/${b.slug}/`;
+  const availability = b.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock";
+  // Rare beads have no listed price, and Google treats a Product without an offer as an error, so they only
+  // get the breadcrumb.
+  const jsonLd = [
+    b.prices && {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: b.title,
+      sku: b.slug,
+      url,
+      description: b.about,
+      image: b.photos.map((p) => site.url + p),
+      brand: { "@type": "Brand", name: site.name },
+      ...(b.prices && {
+        offers: (["normal", "collector"] as const).map((z) => ({
+          "@type": "Offer",
+          name: `${b.title}, ${z === "normal" ? "Normal" : "Collector"} size`,
+          price: b.prices![z],
+          priceCurrency: "INR",
+          availability,
+          itemCondition: "https://schema.org/NewCondition",
+          url,
+          seller: { "@id": `${site.url}/#store` },
+        })),
+      }),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+        { "@type": "ListItem", position: 2, name: "Rudraksha", item: `${site.url}/#collection` },
+        { "@type": "ListItem", position: 3, name: b.title, item: url },
+      ],
+    },
+  ].filter(Boolean);
 
   return (
     <>

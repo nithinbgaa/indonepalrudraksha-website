@@ -25,6 +25,8 @@ export interface Bead {
   prices: Record<BeadSize, number> | null; // null = "Ask for price"
   photos: string[]; // under /public
   available: boolean; // false shows "Currently unavailable"
+  // Ships with a certificate of authenticity (14 Mukhi and above, confirmed by Rado on 2026-11-23).
+  certificate: boolean;
 }
 
 const MUKHI: [number, string, string, string, string | null, string | null, string, [number, number]][] = [
@@ -76,6 +78,7 @@ const mukhiBeads: Bead[] = MUKHI.map(([n, numeral, hi, deity, planet, mantra, pu
   prices: { normal, collector },
   photos: [asset(`/images/beads/${n}-mukhi.webp`)],
   available: true,
+  certificate: n >= 14,
 }));
 
 const rareBeads: Bead[] = [
@@ -99,6 +102,7 @@ const rareBeads: Bead[] = [
     prices: null,
     photos: [asset("/images/beads/gauri-shankar.webp")],
     available: true,
+    certificate: false,
   },
   {
     slug: "garbha-gauri-shankar",
@@ -120,6 +124,7 @@ const rareBeads: Bead[] = [
     prices: null,
     photos: [],
     available: true,
+    certificate: false,
   },
   {
     slug: "ganesh",
@@ -141,6 +146,7 @@ const rareBeads: Bead[] = [
     prices: null,
     photos: [asset("/images/beads/ganesh.webp")],
     available: true,
+    certificate: false,
   },
 ];
 

@@ -59,6 +59,11 @@ export const site = {
   },
 
   maxQtyPerItem: 10,
+
+  // Site ownership codes. Prefer the DNS (TXT record) method in Cloudflare; use these only if a tool insists
+  // on a meta tag. google: the content="…" value from Search Console's "HTML tag" method; facebook: the code
+  // from Meta Business Settings → Brand safety → Domains → "Meta-tag verification".
+  verification: { google: "" as string, facebook: "" as string },
 } as const;
 
 export const consultation = {
