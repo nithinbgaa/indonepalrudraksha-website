@@ -98,7 +98,9 @@ export function Collection() {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-[13px] tracking-[0.14em] text-muted uppercase">{b.deity}</span>
-                <span className="text-base leading-[1.45] text-body">{b.purpose}</span>
+                <span title={b.purpose} className="line-clamp-2 min-h-[2.9em] text-base leading-[1.45] text-body">
+                  {b.purpose}
+                </span>
               </div>
               <div className="mt-auto flex w-full items-center justify-between gap-2 border-t border-hairline pt-3.5">
                 <span className="flex flex-col items-start leading-tight">
@@ -140,7 +142,9 @@ export function Collection() {
             </div>
             <div className="flex flex-col gap-1">
               <span className="text-[13px] tracking-[0.14em] text-muted uppercase">{b.deity}</span>
-              <span className="text-base leading-[1.45] text-body">{b.purpose}</span>
+              <span title={b.purpose} className="line-clamp-2 min-h-[2.9em] text-base leading-[1.45] text-body">
+                {b.purpose}
+              </span>
             </div>
             <div className="mt-auto flex w-full items-center justify-between gap-2 border-t border-hairline pt-3.5">
               <span className="text-[15px] font-semibold text-heading">Price on request</span>

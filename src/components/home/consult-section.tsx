@@ -5,8 +5,8 @@ import { Booking } from "./booking";
 
 const STEPS = [
   "Choose a preferred day and a 30-minute slot.",
-  `Pay ${inr(consultation.fee)} and share your date, time and place of birth.`,
-  "We confirm your slot on WhatsApp and send the call details.",
+  "Send it to us on WhatsApp with your date, time and place of birth.",
+  `We confirm your slot, share the payment details for ${inr(consultation.fee)} (UPI or bank transfer) and send the call details.`,
 ];
 
 export function ConsultSection({ headingLevel = "h2" }: { headingLevel?: "h1" | "h2" }) {
