@@ -15,8 +15,9 @@ export function ThankYou() {
   const consent = useLocal(CONSENT_KEY);
 
   // Count the paid consultation for Google Ads once per payment (only if the visitor accepted cookies).
+  const paidOnline = consultation.razorpayButtonId !== "";
   useEffect(() => {
-    if (consent !== "granted") return;
+    if (!paidOnline || consent !== "granted") return;
     const id = new URLSearchParams(window.location.search).get("razorpay_payment_id") ?? "";
     const key = `inr-consult-paid:${id}`;
     try {
@@ -24,7 +25,7 @@ export function ThankYou() {
       window.sessionStorage.setItem(key, "1");
     } catch {}
     trackConversion("consultPaid", { value: consultation.fee, currency: "INR", ...(id ? { transaction_id: id } : {}) });
-  }, [consent]);
+  }, [consent, paidOnline]);
   let chosen: ChosenSlot | null = null;
   try {
     const v = JSON.parse(raw || "null");
@@ -40,13 +41,15 @@ export function ThankYou() {
         <Check size={28} />
       </span>
       <h1 className="glow-heading m-0 font-display text-[clamp(30px,4vw,44px)] leading-[1.15] font-normal text-heading">
-        Thank you — payment received
+        {paidOnline ? "Thank you — payment received" : "Thank you"}
       </h1>
       {chosen && <span className="text-lg text-chalk">Preferred slot: {chosen.label}</span>}
       <p className="m-0 text-body">
-        We will confirm your slot with {site.founder.name} on WhatsApp within {consultation.confirmWithinHours} hours.
-        If that time has just been taken, we will offer you another time or a full refund. Keep your birth details handy
-        for the call.
+        We will confirm your slot with {site.founder.name} on WhatsApp within {consultation.confirmWithinHours} hours
+        {paidOnline
+          ? ". If that time has just been taken, we will offer you another time or a full refund."
+          : " and share our payment details to pay by UPI or bank transfer."}{" "}
+        Keep your birth details handy for the call.
       </p>
       <a
         href={whatsappLink(bookingMessage(chosen, true))}
@@ -59,7 +62,9 @@ export function ThankYou() {
         Send booking on WhatsApp
       </a>
       <span className="text-sm text-muted">
-        Sending it helps us confirm faster. Include the payment ID from your receipt.
+        {paidOnline
+          ? "Sending it helps us confirm faster. Include the payment ID from your receipt."
+          : "Sending it helps us confirm faster."}
       </span>
       <span lang="sa" className="font-deva text-xl text-line">
         ॐ नमः शिवाय

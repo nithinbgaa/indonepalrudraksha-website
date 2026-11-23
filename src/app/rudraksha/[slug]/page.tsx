@@ -4,7 +4,7 @@ import { beads, getBead, type Bead } from "@/data/beads";
 import { site } from "@/data/site";
 import { ProductHeader } from "@/components/layout/header";
 import { SiteFooter } from "@/components/layout/footer";
-import { Details, ProductMain, ProductVisual, Steps, TitleBlock } from "@/components/product/parts";
+import { Details, ProductMain, ProductNote, ProductVisual, Steps, TitleBlock } from "@/components/product/parts";
 import { BeadPurchase } from "@/components/product/bead-purchase";
 import { AskPrice } from "@/components/product/ask-price";
 import { RudrakshaArt } from "@/components/art/rudraksha-art";
@@ -110,7 +110,7 @@ export default async function BeadPage({ params }: PageProps<"/rudraksha/[slug]"
   const rows: [string, React.ReactNode, string?][] = [["Presiding deity", b.deity]];
   if (b.planet) rows.push(["Ruling planet", b.planet]);
   if (b.mantra) rows.push(["Beej mantra", b.mantra, "sa"]);
-  rows.push(["Worn for", b.purpose], ["Origin", "Nepal"]);
+  rows.push(["Traditional association", b.purpose], ["Origin", "Nepal"]);
   if (b.prices) rows.push(["Sizes", "Normal, or Collector (bigger)"]);
   if (b.certificate) rows.push(["Certificate", "Certificate of authenticity included"]);
   rows.push(["Best day to wear", "Monday"]);
@@ -185,10 +185,13 @@ export default async function BeadPage({ params }: PageProps<"/rudraksha/[slug]"
             </BeadPurchase>
           ) : (
             <>
-              <div className="flex flex-wrap items-baseline gap-3">
-                <span className="font-display text-[30px] text-heading">
-                  {b.available ? "Price on request" : "Currently unavailable"}
-                </span>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <span className="font-display text-[30px] text-heading">
+                    {b.available ? "Price on request" : "Currently unavailable"}
+                  </span>
+                </div>
+                <ProductNote />
               </div>
               <p className="m-0 text-pretty text-body">{b.about}</p>
               <Details rows={rows} />

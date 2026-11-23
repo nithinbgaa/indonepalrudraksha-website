@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { mukhi } from "@/data/beads";
+import { beads } from "@/data/beads";
 import { TextPage } from "@/components/layout/text-page";
 
 export const metadata: Metadata = {
@@ -30,18 +30,18 @@ export default function HowToWear() {
         <li>Now and then, wipe it with a soft cloth and a drop of oil to keep it from drying out.</li>
         <li>Re-string it when the thread begins to loosen.</li>
       </ul>
-      <h2>Each mukhi, its deity and mantra</h2>
+      <h2>Each Rudraksha, its deity and mantra</h2>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-left text-[15px]">
           <thead>
             <tr className="border-b border-hairline text-[13px] tracking-[0.14em] text-muted uppercase">
-              <th className="py-2 pr-4 font-normal">Mukhi</th>
+              <th className="py-2 pr-4 font-normal">Rudraksha</th>
               <th className="py-2 pr-4 font-normal">Deity</th>
               <th className="py-2 pr-4 font-normal">Beej mantra</th>
             </tr>
           </thead>
           <tbody>
-            {mukhi.map((b) => (
+            {beads.map((b) => (
               <tr key={b.slug} className="border-b border-[rgba(142,195,224,0.12)]">
                 <td className="py-2 pr-4">
                   <Link href={`/rudraksha/${b.slug}/`}>{b.short}</Link>

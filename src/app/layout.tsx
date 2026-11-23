@@ -12,6 +12,7 @@ import "@fontsource/noto-sans-tamil/400.css";
 import "@fontsource/noto-sans-tamil/500.css";
 import "./globals.css";
 import { site } from "@/data/site";
+import { visitDateScript } from "@/data/visit";
 import { CartProvider } from "@/lib/cart";
 import { CartPanel } from "@/components/cart/cart-panel";
 import { ConsentManager } from "@/components/layout/consent";
@@ -49,8 +50,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN">
+    // suppressHydrationWarning: the visit-date script below may add data-visit-past before React loads.
+    <html lang="en-IN" suppressHydrationWarning>
       <body className="min-h-dvh antialiased">
+        <script dangerouslySetInnerHTML={{ __html: visitDateScript }} />
         <a
           href="#main"
           className="sr-only z-[60] rounded-full bg-saffron px-5 py-3 font-semibold text-on-saffron focus:not-sr-only focus:fixed focus:top-3 focus:left-3"

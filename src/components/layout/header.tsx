@@ -8,7 +8,7 @@ import { ChevronLeft } from "@/components/ui/icons";
 export const NAV = [
   { href: "/#collection", label: "Rudraksha" },
   { href: "/#malas", label: "Malas & Bracelets" },
-  { href: "/#consult", label: "Horoscope Consultation" },
+  { href: "/consultation/", label: "Horoscope Consultation" },
   { href: "/#founder", label: "Founder's Word" },
   { href: "/#promise", label: "Our Promise" },
   { href: "/contact/", label: "Contact" },

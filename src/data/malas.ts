@@ -82,6 +82,7 @@ export const malas: MalaItem[] = [
   mala({
     slug: "patri-mala",
     title: "Patri Mala",
+    sub: "पत्री माला",
     line: "Hand-strung for japa and daily wear",
     about: "A hand-strung mala for japa and daily wear. Ask us on WhatsApp for the composition and the current price.",
     photos: [asset("/images/malas/patri-mala.webp")],

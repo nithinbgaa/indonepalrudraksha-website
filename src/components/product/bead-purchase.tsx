@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { useRef, useState } from "react";
 import { MobileBar, useBelowFold } from "./mobile-bar";
+import { ProductNote } from "./parts";
 import { useSearch } from "@/lib/client-store";
 import { getBead, sizeLabel, sizeNote, type BeadSize } from "@/data/beads";
 import { site } from "@/data/site";
@@ -34,11 +35,14 @@ export function BeadPurchase({ slug, children }: { slug: string; children?: Reac
 
   return (
     <>
-      <div className="flex flex-wrap items-baseline gap-3">
-        <span className="font-display text-[30px] text-heading">{inr(price)}</span>
-        <span className="text-sm text-muted">
-          per bead · {sizeLabel[size].toLowerCase()} size{bead.certificate ? " · certificate included" : ""}
-        </span>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap items-baseline gap-3">
+          <span className="font-display text-[30px] text-heading">{inr(price)}</span>
+          <span className="text-sm text-muted">
+            per bead · {sizeLabel[size].toLowerCase()} size{bead.certificate ? " · certificate included" : ""}
+          </span>
+        </div>
+        <ProductNote />
       </div>
 
       <p className="m-0 text-pretty text-body">{bead.about}</p>

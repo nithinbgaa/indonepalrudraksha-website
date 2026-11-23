@@ -1,7 +1,7 @@
 import type { MalaItem } from "@/data/malas";
 import { ProductHeader } from "@/components/layout/header";
 import { SiteFooter } from "@/components/layout/footer";
-import { Details, ProductMain, ProductVisual, Steps, TitleBlock } from "./parts";
+import { Details, ProductMain, ProductNote, ProductVisual, Steps, TitleBlock } from "./parts";
 import { AskPrice } from "./ask-price";
 import { MalaArt } from "@/components/art/mala-art";
 
@@ -29,7 +29,7 @@ export function MalaPage({ m }: { m: MalaItem }) {
 
   return (
     <>
-      <ProductHeader back={{ href: "/#malas", label: "All malas" }} />
+      <ProductHeader back={{ href: "/#malas", label: isMala ? "All malas" : "Malas & Bracelets" }} />
       <ProductMain
         crumbs={[{ href: "/", label: "Home" }, { href: "/#malas", label: "Malas & Bracelets" }, { label: m.title }]}
       >
@@ -51,11 +51,14 @@ export function MalaPage({ m }: { m: MalaItem }) {
             sub={m.sub}
             subLang={kar ? "ta" : "hi"}
           />
-          <div className="flex flex-wrap items-baseline gap-3">
-            <span className="font-display text-[30px] text-heading">
-              {m.available ? "Price on request" : "Currently unavailable"}
-            </span>
-            <span className="text-sm text-muted">per {m.form}</span>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-wrap items-baseline gap-3">
+              <span className="font-display text-[30px] text-heading">
+                {m.available ? "Price on request" : "Currently unavailable"}
+              </span>
+              <span className="text-sm text-muted">per {m.form}</span>
+            </div>
+            <ProductNote />
           </div>
           <p className="m-0 text-pretty text-body">{m.about}</p>
           {rows.length > 0 && <Details rows={rows} />}

@@ -23,7 +23,7 @@ export function Collection() {
     <div className="flex min-w-0 flex-col gap-[22px]">
       <p className="m-0 mx-auto -mt-[38px] max-w-[620px] text-center text-pretty text-body">
         {size === "normal"
-          ? "Each mukhi — a natural line running from the bead's crown to its base — carries its own deity and its own blessing. Find the one meant for you."
+          ? "Each mukhi — a natural line running from the bead's crown to its base — is linked with a deity in traditional associations from Vedic scripture."
           : "The same faces of Rudra in a bigger size, chosen for collectors and for those who want a bolder bead."}
       </p>
       <div className="flex flex-wrap items-center justify-between gap-4">

@@ -8,12 +8,15 @@ export function TextPage({
   title,
   intro,
   updated,
+  plain = false,
   children,
 }: {
   eyebrow: string;
   title: string;
   intro?: React.ReactNode;
   updated?: string;
+  /** Lay children out as-is instead of with the long-text (policy) styles. */
+  plain?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -35,7 +38,11 @@ export function TextPage({
             {updated && <span className="text-sm text-muted">Last updated {updated}</span>}
             <Divider />
           </div>
-          <div className="prose-policy">{children}</div>
+          {plain ? (
+            <div className="flex flex-col gap-10">{children}</div>
+          ) : (
+            <div className="prose-policy">{children}</div>
+          )}
         </div>
       </main>
       <SiteFooter />

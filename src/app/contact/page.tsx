@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { site } from "@/data/site";
+import { visit, visitPath } from "@/data/visit";
 import { whatsappLink } from "@/lib/format";
 import { TextPage } from "@/components/layout/text-page";
 import { PhoneIcon, WhatsAppIcon } from "@/components/ui/icons";
@@ -50,11 +52,17 @@ export default function ContactPage() {
       </address>
       <h2>Hours</h2>
       <p>Calls and WhatsApp: {site.hours}. Messages sent outside these hours are answered the next working day.</p>
+      <h2>{visit.city} appointments</h2>
+      <p>
+        In-person consultations with {visit.consultant} in {visit.city}: {visit.address.join(", ")}. Call or WhatsApp{" "}
+        <a href={`tel:${visit.phone}`}>{visit.phoneDisplay}</a> to book. See{" "}
+        <Link href={visitPath}>the {visit.city} visit page</Link> for the next date.
+      </p>
       <h2>Grievance officer</h2>
       <p>
         Under the Consumer Protection (E-Commerce) Rules, 2020: {site.grievanceOfficer.name},{" "}
-        {site.grievanceOfficer.designation}, {site.email}. We acknowledge complaints within 48 hours and resolve them
-        within one month.
+        {site.grievanceOfficer.designation}, {site.email}, {site.legal.registeredOffice.join(", ")}. We acknowledge
+        complaints within 48 hours and resolve them within one month.
       </p>
     </TextPage>
   );

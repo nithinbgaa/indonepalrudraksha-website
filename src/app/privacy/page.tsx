@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/data/site";
+import { ads, site } from "@/data/site";
 import { TextPage } from "@/components/layout/text-page";
 
 export const metadata: Metadata = {
@@ -9,11 +9,12 @@ export const metadata: Metadata = {
 };
 
 const ext = { target: "_blank", rel: "noopener" } as const;
+const adsOn = ads.googleAdsId !== "";
 
 export default function Privacy() {
   const { legal, grievanceOfficer: go } = site;
   return (
-    <TextPage eyebrow="Legal" title="Privacy policy" updated="23 November 2026">
+    <TextPage eyebrow="Legal" title="Privacy policy" updated="24 November 2026">
       <p>
         This policy explains what personal data {site.name} collects through {site.url.replace("https://", "")}, on
         WhatsApp and by email, why we collect it, who we share it with, and your rights under India&apos;s Digital
@@ -56,54 +57,58 @@ export default function Privacy() {
       <h2 id="cookies" className="scroll-mt-24">
         Cookies and Google Ads
       </h2>
-      <p>
-        We advertise on Google. When you first visit, a banner asks whether you accept advertising cookies. Nothing from
-        Google is loaded until you press <strong>Accept</strong>; if you press <strong>Decline</strong>, no advertising
-        cookies are set.
-      </p>
-      <p>If you accept:</p>
-      <ul>
-        <li>
-          We use the Google Ads tag to measure whether a visit from one of our ads led to a WhatsApp order, a price
-          enquiry or a consultation booking (&ldquo;conversion tracking&rdquo;), and to build lists of past visitors so
-          we can show them our ads again (&ldquo;remarketing&rdquo;).
-        </li>
-        <li>Third-party vendors, including Google, show our ads on sites across the internet.</li>
-        <li>
-          Third-party vendors, including Google, use cookies and similar identifiers to show ads based on your past
-          visits to this website.
-        </li>
-        <li>
-          Google receives information such as your IP address, browser and device details, the pages you visit here and
-          cookie identifiers. Google&apos;s use of this data is governed by the{" "}
-          <a href="https://policies.google.com/privacy" {...ext}>
-            Google Privacy Policy
-          </a>
-          ; see also{" "}
-          <a href="https://policies.google.com/technologies/partner-sites" {...ext}>
-            how Google uses information from sites that use its services
-          </a>
-          .
-        </li>
-      </ul>
-      <p>
-        <strong>How to opt out:</strong> use <strong>Cookie settings</strong> at the bottom of any page to change your
-        choice at any time (declining removes our Google Ads cookies from this site). You can also turn off personalised
-        ads in{" "}
-        <a href="https://adssettings.google.com/" {...ext}>
-          Google&apos;s Ads Settings
-        </a>
-        , opt out of other vendors&apos; cookies at the{" "}
-        <a href="https://optout.networkadvertising.org/" {...ext}>
-          Network Advertising Initiative opt-out page
-        </a>
-        , or block cookies in your browser settings.
-      </p>
+      {adsOn ? (
+        <>
+          <p>
+            We advertise on Google. When you first visit, a banner asks whether you accept advertising cookies. Nothing
+            from Google is loaded until you press <strong>Accept</strong>; if you press <strong>Decline</strong>, no
+            advertising cookies are set.
+          </p>
+          <p>If you accept:</p>
+          <ul>
+            <li>
+              Where permitted, we use the Google Ads tag only to measure whether a visit from one of our ads led to a
+              call, a WhatsApp order, a price enquiry or a consultation booking (&ldquo;conversion measurement&rdquo;).
+            </li>
+            <li>
+              We have turned off ad personalisation in the tag. We do not build lists of visitors and do not use your
+              visit to this website to personalise the ads you see.
+            </li>
+            <li>
+              Google receives information such as your IP address, browser and device details, the page you arrived on
+              and a cookie identifier. Google&apos;s use of this data is governed by the{" "}
+              <a href="https://policies.google.com/privacy" {...ext}>
+                Google Privacy Policy
+              </a>
+              ; see also{" "}
+              <a href="https://policies.google.com/technologies/partner-sites" {...ext}>
+                how Google uses information from sites that use its services
+              </a>
+              .
+            </li>
+          </ul>
+          <p>
+            <strong>How to change your choice:</strong> use <strong>Cookie settings</strong> at the bottom of any page
+            (declining removes our Google Ads cookies from this site). You can also manage ads in{" "}
+            <a href="https://adssettings.google.com/" {...ext}>
+              Google&apos;s Ads Settings
+            </a>{" "}
+            or block cookies in your browser settings.
+          </p>
+        </>
+      ) : (
+        <p>
+          This website currently sets no advertising or analytics cookies and loads no Google or Meta tracking tags.
+          Your cart and preferred consultation slot are kept only in your own browser. If we start measuring our ads, a
+          banner will ask for your consent first, nothing will load before you accept, and this section will be updated.
+          The <strong>Cookie settings</strong> link at the bottom of every page brings you here.
+        </p>
+      )}
 
       <h2>Why we use your data</h2>
       <p>
         To answer your questions, confirm and deliver your order, issue invoices, arrange and hold your consultation,
-        process refunds, meet legal and tax duties, and (only with your consent) measure and improve our advertising.
+        process refunds, meet legal and tax duties, and (only with your consent) measure how well our advertising works.
         Birth details are used only to prepare your reading. We process your data on the basis of your consent, which
         you give by contacting us, placing an order, booking or accepting cookies, and for legitimate uses the law
         allows, such as tax records.

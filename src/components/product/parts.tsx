@@ -139,3 +139,13 @@ export function TitleBlock({
     </div>
   );
 }
+
+/** One line under the price on every product page (Google and Meta ad policies: no promised outcomes). */
+export function ProductNote() {
+  return (
+    <p className="m-0 text-[13px] leading-normal text-muted">
+      Rooted in traditional Vedic belief; we guarantee the natural authenticity of our beads, not specific personal,
+      medical, or financial outcomes.
+    </p>
+  );
+}

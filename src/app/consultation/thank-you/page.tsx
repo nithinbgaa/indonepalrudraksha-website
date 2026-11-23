@@ -3,10 +3,11 @@ import { SiteHeader } from "@/components/layout/header";
 import { SiteFooter } from "@/components/layout/footer";
 import { ThankYou } from "./thank-you";
 
-// Razorpay Payment Button redirects here after a successful payment.
+// A payment gateway button (consultation.razorpayButtonId) redirects here after payment. Without one, the page
+// only thanks the visitor and points them to WhatsApp.
 export const metadata: Metadata = {
   title: "Thank you",
-  robots: { index: false },
+  robots: { index: false, follow: false },
 };
 
 export default function Page() {

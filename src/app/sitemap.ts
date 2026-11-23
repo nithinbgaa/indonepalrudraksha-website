@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { beads } from "@/data/beads";
 import { bracelets, itemHref, malas } from "@/data/malas";
 import { site } from "@/data/site";
+import { visitPath } from "@/data/visit";
 
 export const dynamic = "force-static";
 
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     "/",
     "/consultation/",
+    visitPath,
     "/how-to-wear/",
     "/contact/",
     "/shipping-and-returns/",

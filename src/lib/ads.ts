@@ -29,10 +29,16 @@ export function startGoogleTag() {
     // eslint-disable-next-line prefer-rest-params
     window.dataLayer!.push(arguments);
   };
-  const consent = { ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted" };
-  window.gtag("consent", "default", { ...consent, analytics_storage: "denied" });
+  // Conversion measurement only: Google doesn't allow remarketing for religious and spiritual sites, so ad
+  // personalisation stays off even after the visitor accepts.
+  window.gtag("consent", "default", {
+    ad_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
   window.gtag("js", new Date());
-  window.gtag("config", ads.googleAdsId);
+  window.gtag("config", ads.googleAdsId, { allow_ad_personalization_signals: false });
   const s = document.createElement("script");
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ads.googleAdsId)}`;

@@ -249,7 +249,7 @@ export function CartPanel() {
             <span className="text-sm tracking-[0.12em] text-chalk">Order no. {placed.order}</span>
             <span className="max-w-[340px] text-body">
               Send the message that opened in WhatsApp. We&apos;ll confirm your {plural(placed.count, "bead")}, delivery
-              details and the payment link there.
+              details and how to pay (UPI or bank transfer) there.
             </span>
             <a
               href={placed.link}

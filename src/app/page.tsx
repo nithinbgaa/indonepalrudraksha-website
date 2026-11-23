@@ -9,6 +9,7 @@ import { Collection } from "@/components/home/collection";
 import { MalaCollection } from "@/components/home/malas";
 import { ConsultSection } from "@/components/home/consult-section";
 import { FounderCarousel } from "@/components/home/founder";
+import { VisitBanner } from "@/components/visit/visit";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -75,6 +76,7 @@ export default function Home() {
       />
       <SiteHeader />
       <main id="main">
+        <VisitBanner />
         <noscript>
           <style>{`#top>div{visibility:visible!important}`}</style>
         </noscript>

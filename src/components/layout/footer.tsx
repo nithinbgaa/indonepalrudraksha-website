@@ -85,11 +85,18 @@ export function SiteFooter() {
             </address>
           </div>
         </div>
-        <p className="m-0 max-w-[900px] text-[13px] leading-normal text-muted">
-          Rudraksha, mantras and astrology are traditional spiritual practices. Descriptions of deities, planets and
-          benefits reflect traditional belief; we do not promise any particular result, and a consultation is not a
-          substitute for medical, legal or financial advice.
-        </p>
+        <div className="flex max-w-[900px] flex-col gap-2 text-[13px] leading-normal text-muted">
+          <p className="m-0">
+            <strong className="font-semibold text-body">{site.legal.tradeName}</strong> · Proprietor {site.legal.name} ·
+            GSTIN: {site.legal.gstin}
+          </p>
+          <p className="m-0">
+            {site.legal.tradeName} guarantees the authenticity and natural origin of every bead, not specific outcomes.
+            Rudraksha, mantras and astrology are traditional spiritual practices; descriptions of deities, planets and
+            benefits reflect traditional belief, and a consultation is not a substitute for medical, legal or financial
+            advice.
+          </p>
+        </div>
         <div className="flex flex-wrap justify-between gap-3 border-t border-[rgba(142,195,224,0.18)] pt-6 text-sm text-muted">
           <span>
             © {new Date().getFullYear()} {site.name}

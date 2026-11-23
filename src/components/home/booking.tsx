@@ -97,8 +97,8 @@ export function Booking() {
 
   return (
     <div className="flex min-w-0 flex-[1_1_520px] flex-col gap-6 rounded-[22px] border border-[rgba(142,195,224,0.3)] bg-[rgba(5,12,20,0.62)] p-5 shadow-[0_0_60px_rgba(95,168,218,0.12)] sm:p-7">
-      {/* Ten readings a day. Every claim here is true for every visitor: a static site cannot know
-          how many slots are really left, so it never shows a fake "only N left" count. */}
+      {/* Up to ten consultations a day, stated plainly. A static site cannot know how many slots are left, so
+          there is no countdown or "filling fast" wording (Google and Meta ad policies, Indian dark-pattern rules). */}
       <div
         className="relative -mx-5 -mt-5 overflow-hidden rounded-t-[22px] border-b border-[rgba(227,154,76,0.35)] px-5 pt-6 pb-5 sm:-mx-7 sm:-mt-7 sm:px-7"
         style={{
@@ -113,9 +113,9 @@ export function Booking() {
             </span>
           </div>
           <div className="flex min-w-0 flex-col gap-1">
-            <span className="text-[12px] tracking-[0.28em] text-saffron uppercase">Strictly limited</span>
+            <span className="text-[12px] tracking-[0.28em] text-saffron uppercase">One to one</span>
             <span className="glow-heading font-display text-[26px] leading-[1.1] text-heading sm:text-[30px]">
-              Only 10 readings a day
+              Up to 10 consultations a day
             </span>
             <span className="text-[15px] text-chalk">
               {inr(consultation.fee)} · {consultation.durationMinutes} minutes, one to one
@@ -130,11 +130,8 @@ export function Booking() {
         </div>
 
         <p className="mt-4 mb-0 text-[15px] leading-relaxed text-body">
-          After three decades of guiding people, {site.founder.name} still reads every chart himself — and only ten a
-          day, so each reading gets his full, unhurried attention. When a day&apos;s ten are taken, the next opening may
-          be days away.
+          {site.founder.name} conducts up to 10 one-to-one consultations per day. Select an available slot below.
         </p>
-        <p className="mt-2 mb-0 text-[15px] font-semibold text-heading">Choose your day now, before it fills.</p>
       </div>
 
       {step === "pick" && (
@@ -227,9 +224,24 @@ export function Booking() {
                 </div>
               </div>
             ) : (
-              <span className="text-[15px] text-muted">
-                {mounted ? "No slots left this week. Try the next week." : "Loading slots…"}
-              </span>
+              <div className="flex flex-col gap-3">
+                <span className="text-[15px] text-muted">
+                  {mounted ? "No slots left this week. Try the next week." : "Loading slots…"}
+                </span>
+                {!mounted && (
+                  // Shown by CSS after 5 seconds, so a visitor is never stuck if the slots can't load.
+                  <a
+                    href={whatsappLink(bookingMessage(null, false))}
+                    data-conversion="consultRequest"
+                    target="_blank"
+                    rel="noopener"
+                    className="reveal-late flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-saffron px-6 text-[17px] font-semibold text-on-saffron no-underline hover:text-on-saffron"
+                  >
+                    <WhatsAppIcon size={20} />
+                    Book on WhatsApp instead
+                  </a>
+                )}
+              </div>
             )}
           </div>
           <button

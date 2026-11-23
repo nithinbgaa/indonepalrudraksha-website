@@ -43,8 +43,8 @@ export function ConsentManager() {
       className="fixed inset-x-3 bottom-[max(12px,env(safe-area-inset-bottom))] z-50 mx-auto max-w-[760px] rounded-[22px] border border-edge bg-[rgba(8,19,32,0.97)] p-5 shadow-[0_12px_40px_rgba(0,0,0,0.6)] backdrop-blur-md sm:flex sm:items-center sm:gap-6"
     >
       <p className="m-0 text-[15px] leading-normal text-body">
-        We use Google&apos;s advertising cookies to see which of our ads bring you here and to show you our ads on other
-        sites. They are only set if you accept.{" "}
+        We use a Google Ads cookie to measure which of our ads bring you here. It is only set if you accept, and we
+        never use it to personalise ads.{" "}
         <Link href="/privacy/#cookies" className="text-chalk underline underline-offset-2">
           Privacy policy
         </Link>
@@ -69,10 +69,17 @@ export function ConsentManager() {
   );
 }
 
-/** Footer link that brings the cookie banner back. Hidden while Google Ads is not set up. */
+/** Footer "Cookie settings": reopens the cookie banner, or (while no Google tag is set up, so there are no
+ *  cookies to choose) links to the privacy policy's cookie section. */
 export function CookieSettingsButton({ className }: { className?: string }) {
   const hydrated = useHydrated();
-  if (!adsEnabled || !hydrated) return null;
+  if (!adsEnabled || !hydrated) {
+    return (
+      <Link href="/privacy/#cookies" className={className}>
+        Cookie settings
+      </Link>
+    );
+  }
   return (
     <button type="button" onClick={() => setConsent("")} className={className}>
       Cookie settings
