@@ -14,12 +14,9 @@ export const visit = {
   phone: "+918186899997", // tel: links
   phoneDisplay: "+91 81868 99997",
   whatsapp: "918186899997", // wa.me links, digits only
-  address: [
-    "Door No. 1(A), Ground Floor, Plot No. 02",
-    "Near Vinayaka Apartments, Opp. Auto Nagar Bus Stop",
-    "JD Nagar Rd, JD Nagar, Patamata",
-    "Vijayawada, Andhra Pradesh 520010",
-  ],
+  // Only the city is published; the office directions go out on WhatsApp once an appointment is confirmed.
+  location: "Vijayawada, Andhra Pradesh",
+  directionsNote: "Exact office directions shared when your appointment is confirmed on WhatsApp.",
 };
 
 export const visitPath = `/${visit.slug}/`;
@@ -35,9 +32,6 @@ export const visitBookingMessage = () =>
 
 export const visitNextDateMessage = () =>
   `Namaste! When is the next in-person consultation with ${visit.consultant} in ${visit.city}? I would like an appointment.`;
-
-export const mapsLink = () =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(visit.address.join(", "))}`;
 
 /** Inline script for the root layout: marks the page once the visit date has passed in IST, before anything
  *  is painted, so dated content never flashes. CSS in globals.css does the hiding. */

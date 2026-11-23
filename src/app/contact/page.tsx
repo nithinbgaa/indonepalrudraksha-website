@@ -54,8 +54,8 @@ export default function ContactPage() {
       <p>Calls and WhatsApp: {site.hours}. Messages sent outside these hours are answered the next working day.</p>
       <h2>{visit.city} appointments</h2>
       <p>
-        In-person consultations with {visit.consultant} in {visit.city}: {visit.address.join(", ")}. Call or WhatsApp{" "}
-        <a href={`tel:${visit.phone}`}>{visit.phoneDisplay}</a> to book. See{" "}
+        In-person consultations with {visit.consultant} in {visit.location}. Call or WhatsApp{" "}
+        <a href={`tel:${visit.phone}`}>{visit.phoneDisplay}</a> to book. {visit.directionsNote} See{" "}
         <Link href={visitPath}>the {visit.city} visit page</Link> for the next date.
       </p>
       <h2>Grievance officer</h2>

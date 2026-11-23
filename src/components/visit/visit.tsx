@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import { site } from "@/data/site";
-import { mapsLink, visit, visitBookingMessage, visitNextDateMessage, visitPath, visitWhatsApp } from "@/data/visit";
+import { visit, visitBookingMessage, visitNextDateMessage, visitPath, visitWhatsApp } from "@/data/visit";
 import { PhoneIcon, WhatsAppIcon } from "@/components/ui/icons";
 
 const solid =
@@ -41,9 +41,9 @@ export function VisitBanner() {
             {visit.city} · {visit.dateLabel} · {visit.consultant}
           </span>
           <span className="text-[15px] text-muted">
-            {visit.time} ·{" "}
+            {visit.location} · {visit.time} ·{" "}
             <Link href={visitPath} className="text-chalk underline underline-offset-2">
-              Address and details
+              Visit details
             </Link>
           </span>
         </div>
@@ -80,23 +80,10 @@ export function VisitCard() {
             </dd>
           </div>
           <div className={row}>
-            <dt className={label}>Address</dt>
+            <dt className={label}>Location</dt>
             <dd className="m-0">
-              <address className="text-heading not-italic">
-                {visit.address.map((l) => (
-                  <span key={l} className="block">
-                    {l}
-                  </span>
-                ))}
-              </address>
-              <a
-                href={mapsLink()}
-                target="_blank"
-                rel="noopener"
-                className="mt-1 inline-flex min-h-11 items-center text-chalk underline underline-offset-2"
-              >
-                Open in Google Maps
-              </a>
+              <span className="block text-heading">{visit.location}</span>
+              <span className="mt-1 block text-[15px] text-muted">{visit.directionsNote}</span>
             </dd>
           </div>
           <div className={row}>
