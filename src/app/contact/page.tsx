@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/data/site";
-import { visit, visitPath } from "@/data/visit";
+import { visitPath, visits } from "@/data/visit";
 import { whatsappLink } from "@/lib/format";
 import { TextPage } from "@/components/layout/text-page";
 import { PhoneIcon, WhatsAppIcon } from "@/components/ui/icons";
@@ -52,12 +52,19 @@ export default function ContactPage() {
       </address>
       <h2>Hours</h2>
       <p>Calls and WhatsApp: {site.hours}. Messages sent outside these hours are answered the next working day.</p>
-      <h2>{visit.city} appointments</h2>
+      <h2>In-person appointments</h2>
       <p>
-        In-person consultations with {visit.consultant} in {visit.location}. Call or WhatsApp{" "}
-        <a href={`tel:${visit.phone}`}>{visit.phoneDisplay}</a> to book. {visit.directionsNote} See{" "}
-        <Link href={visitPath}>the {visit.city} visit page</Link> for the next date.
+        In-person consultations with {visits[0].consultant}. Exact office directions are shared when your appointment is
+        confirmed on WhatsApp.
       </p>
+      <ul>
+        {visits.map((v) => (
+          <li key={v.slug}>
+            <strong>{v.location}:</strong> call or WhatsApp <a href={`tel:${v.phone}`}>{v.phoneDisplay}</a>. See{" "}
+            <Link href={visitPath(v)}>the {v.city} visit page</Link> for the next date.
+          </li>
+        ))}
+      </ul>
       <h2>Grievance officer</h2>
       <p>
         Under the Consumer Protection (E-Commerce) Rules, 2020: {site.grievanceOfficer.name},{" "}

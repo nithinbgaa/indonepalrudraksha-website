@@ -162,14 +162,6 @@
   font-weight: 600;
 }
 
-/* In-person visit (src/data/visit.ts): the layout script sets data-visit-past on <html> after the date (IST). */
-html[data-visit-past] .visit-upcoming {
-  display: none !important;
-}
-html:not([data-visit-past]) .visit-past {
-  display: none !important;
-}
-
 /* Fallback that appears only if something is still loading after 5 seconds (booking slots). */
 .reveal-late {
   visibility: hidden;
