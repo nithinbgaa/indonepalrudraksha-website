@@ -50,6 +50,30 @@ export const visits: Visit[] = [
     whatsapp: "918186899997",
     location: "Vijayawada, Andhra Pradesh",
   },
+  {
+    ...common,
+    city: "Kakinada",
+    slug: "kakinada",
+    date: "2026-11-29",
+    dateLabel: "Sunday, Nov 29",
+    time: "Morning to Afternoon (By Appointment)",
+    phone: "+917799799311",
+    phoneDisplay: "+91 77997 99311",
+    whatsapp: "917799799311",
+    location: "Kakinada, Andhra Pradesh",
+  },
+  {
+    ...common,
+    city: "Rajahmundry",
+    slug: "rajahmundry",
+    date: "2026-11-29",
+    dateLabel: "Sunday, Nov 29",
+    time: "Afternoon to Evening (By Appointment)",
+    phone: "+917997993233",
+    phoneDisplay: "+91 79979 93233",
+    whatsapp: "917997993233",
+    location: "Rajahmundry, Andhra Pradesh",
+  },
 ];
 
 export const visitBySlug = (slug: string) => {

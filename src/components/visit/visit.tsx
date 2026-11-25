@@ -36,7 +36,7 @@ export function VisitBanner() {
         <div className="flex flex-col gap-1">
           <span className="text-[12px] tracking-[0.28em] text-saffron uppercase">In-person consultations</span>
           <span className="font-display text-[22px] leading-tight text-heading sm:text-[24px]">
-            Meet {consultant} in {visits.map((v) => v.city).join(" and ")}
+            Meet {consultant} in person
           </span>
         </div>
         <ul className="m-0 grid list-none gap-3 p-0 lg:grid-cols-2">
@@ -45,7 +45,7 @@ export function VisitBanner() {
               key={v.slug}
               data-visit={v.slug}
               data-visit-date={v.date}
-              className="visit-upcoming flex flex-col gap-3 rounded-[18px] border border-[rgba(142,195,224,0.26)] bg-card p-4 sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-start"
+              className="visit-upcoming flex flex-col gap-2.5 rounded-[18px] border border-[rgba(142,195,224,0.26)] bg-card p-3.5 sm:flex-row sm:items-center sm:justify-between sm:p-4 lg:flex-col lg:items-start"
             >
               <div className="flex flex-col">
                 <span className="font-display text-[21px] leading-tight text-heading">
