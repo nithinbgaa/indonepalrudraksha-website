@@ -106,9 +106,7 @@ export function VisitCard({ v }: { v: Visit }) {
           <div className={row}>
             <dt className={label}>Consultant</dt>
             <dd className="m-0 text-heading">
-              {v.founder
-                ? `${v.consultant} (Founder, ${site.legal.tradeName})`
-                : `${v.consultant}, ${site.legal.tradeName}`}
+              {v.founder ? `${v.consultant} (Founder, ${site.legal.tradeName})` : v.consultant}
             </dd>
           </div>
           <div className={row}>

@@ -76,7 +76,7 @@ export const visits: Visit[] = [
   },
   {
     // Another consultant from the team (the founder is in Kakinada and Rajahmundry that day).
-    consultant: "Our Bangalore consultant",
+    consultant: "Shravani, Rudraksha Specialist",
     founder: false,
     directionsNote: founderVisit.directionsNote,
     city: "Bangalore",
