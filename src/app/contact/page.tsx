@@ -54,8 +54,8 @@ export default function ContactPage() {
       <p>Calls and WhatsApp: {site.hours}. Messages sent outside these hours are answered the next working day.</p>
       <h2>In-person appointments</h2>
       <p>
-        In-person consultations with {visits[0].consultant}. Exact office directions are shared when your appointment is
-        confirmed on WhatsApp.
+        In-person consultations by appointment. Exact office directions are shared when your appointment is confirmed on
+        WhatsApp.
       </p>
       <ul>
         {visits.map((v) => (

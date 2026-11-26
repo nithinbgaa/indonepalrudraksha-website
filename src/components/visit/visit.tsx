@@ -26,32 +26,37 @@ function Buttons({ v, message }: { v: Visit; message: string }) {
   );
 }
 
-/** One compact card on the homepage, above the hero, with a row per city. A city's row disappears after its
+/** One compact card on the homepage, above the hero, with a row per city (swipeable cards on phones). A city's row disappears after its
  *  date; the whole card disappears (no empty space) once every visit has passed. */
 export function VisitBanner() {
-  const consultant = visits[0].consultant;
+  const founder = visits.find((v) => v.founder)?.consultant;
+  // Name the founder in the heading only when every visit is his; otherwise each row says who consults.
+  const heading =
+    founder && visits.every((v) => v.founder) ? `Meet ${founder} in person` : "Book an in-person consultation";
   return (
     <div data-visit="all" className="visit-upcoming border-b border-hairline bg-deep">
       <section aria-label="In-person consultations" className="mx-auto flex max-w-[1200px] flex-col gap-4 px-6 py-5">
         <div className="flex flex-col gap-1">
           <span className="text-[12px] tracking-[0.28em] text-saffron uppercase">In-person consultations</span>
-          <span className="font-display text-[22px] leading-tight text-heading sm:text-[24px]">
-            Meet {consultant} in person
-          </span>
+          <span className="font-display text-[22px] leading-tight text-heading sm:text-[24px]">{heading}</span>
         </div>
-        <ul className="m-0 grid list-none gap-3 p-0 lg:grid-cols-2">
+        <ul
+          aria-label="Cities"
+          className="m-0 -mx-6 flex snap-x snap-mandatory scroll-px-6 [scrollbar-width:none] list-none gap-3 overflow-x-auto px-6 pb-1 sm:mx-0 sm:grid sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-2"
+        >
           {visits.map((v) => (
             <li
               key={v.slug}
               data-visit={v.slug}
               data-visit-date={v.date}
-              className="visit-upcoming flex flex-col gap-2.5 rounded-[18px] border border-[rgba(142,195,224,0.26)] bg-card p-3.5 sm:flex-row sm:items-center sm:justify-between sm:p-4 lg:flex-col lg:items-start"
+              className="visit-upcoming flex w-[86%] flex-none snap-start flex-col gap-2.5 rounded-[18px] border border-[rgba(142,195,224,0.26)] bg-card p-3.5 sm:w-auto sm:flex-row sm:items-center sm:justify-between sm:p-4 lg:flex-col lg:items-start"
             >
               <div className="flex flex-col">
                 <span className="font-display text-[21px] leading-tight text-heading">
                   {v.city} · {v.dateLabel}
                 </span>
                 <span className="text-[15px] text-muted">
+                  {v.founder ? `With ${v.consultant} · ` : ""}
                   {v.time} ·{" "}
                   <Link href={visitPath(v)} className="text-chalk underline underline-offset-2">
                     Details
@@ -101,7 +106,9 @@ export function VisitCard({ v }: { v: Visit }) {
           <div className={row}>
             <dt className={label}>Consultant</dt>
             <dd className="m-0 text-heading">
-              {v.consultant} ({v.role}, {site.legal.tradeName})
+              {v.founder
+                ? `${v.consultant} (Founder, ${site.legal.tradeName})`
+                : `${v.consultant}, ${site.legal.tradeName}`}
             </dd>
           </div>
           <div className={row}>
@@ -133,8 +140,10 @@ export function VisitCard({ v }: { v: Visit }) {
           The next {v.city} consultation
         </h2>
         <p className="m-0 text-body">
-          {v.consultant} visits {v.city} for in-person consultations from time to time. Call or WhatsApp{" "}
-          {v.phoneDisplay} and we will tell you the next date and book your appointment.
+          {v.founder
+            ? `${v.consultant} visits ${v.city} for in-person consultations from time to time.`
+            : `We hold in-person consultations in ${v.city} from time to time.`}{" "}
+          Call or WhatsApp {v.phoneDisplay} and we will tell you the next date and book your appointment.
         </p>
         <Buttons v={v} message={visitNextDateMessage(v)} />
       </div>

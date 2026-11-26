@@ -9,8 +9,8 @@ export type Visit = {
   date: string; // YYYY-MM-DD in IST
   dateLabel: string;
   time: string;
-  consultant: string;
-  role: string;
+  consultant: string; // as shown on the page, e.g. "Sri Panduranga Rao Garu" or "Our Bangalore consultant"
+  founder: boolean; // true when the founder himself consults (changes the wording)
   phone: string; // tel: links
   phoneDisplay: string;
   whatsapp: string; // wa.me links, digits only
@@ -18,16 +18,16 @@ export type Visit = {
   directionsNote: string;
 };
 
-const common = {
+const founderVisit = {
   consultant: "Sri Panduranga Rao Garu",
-  role: "Founder",
+  founder: true,
   directionsNote: "Exact office directions shared when your appointment is confirmed on WhatsApp.",
 };
 
 // In the order they happen.
 export const visits: Visit[] = [
   {
-    ...common,
+    ...founderVisit,
     city: "Guntur",
     slug: "guntur",
     date: "2026-11-26",
@@ -39,7 +39,7 @@ export const visits: Visit[] = [
     location: "Guntur, Andhra Pradesh",
   },
   {
-    ...common,
+    ...founderVisit,
     city: "Vijayawada",
     slug: "vijayawada",
     date: "2026-11-26",
@@ -51,7 +51,7 @@ export const visits: Visit[] = [
     location: "Vijayawada, Andhra Pradesh",
   },
   {
-    ...common,
+    ...founderVisit,
     city: "Kakinada",
     slug: "kakinada",
     date: "2026-11-29",
@@ -63,7 +63,7 @@ export const visits: Visit[] = [
     location: "Kakinada, Andhra Pradesh",
   },
   {
-    ...common,
+    ...founderVisit,
     city: "Rajahmundry",
     slug: "rajahmundry",
     date: "2026-11-29",
@@ -73,6 +73,21 @@ export const visits: Visit[] = [
     phoneDisplay: "+91 79979 93233",
     whatsapp: "917997993233",
     location: "Rajahmundry, Andhra Pradesh",
+  },
+  {
+    // Another consultant from the team (the founder is in Kakinada and Rajahmundry that day).
+    consultant: "Our Bangalore consultant",
+    founder: false,
+    directionsNote: founderVisit.directionsNote,
+    city: "Bangalore",
+    slug: "bangalore",
+    date: "2026-11-29",
+    dateLabel: "Sunday, Nov 29",
+    time: "By Appointment",
+    phone: "+919177778855",
+    phoneDisplay: "+91 91777 78855",
+    whatsapp: "919177778855",
+    location: "Bengaluru, Karnataka",
   },
 ];
 
@@ -87,15 +102,17 @@ export const visitPath = (v: Visit) => `/${v.slug}/`;
 export const visitWhatsApp = (v: Visit, message: string) =>
   `https://wa.me/${v.whatsapp}?text=${encodeURIComponent(message)}`;
 
+const withWhom = (v: Visit) => (v.founder ? ` with ${v.consultant}` : "");
+
 export const visitBookingMessage = (v: Visit) =>
   [
-    `Namaste! I would like an appointment for the in-person consultation with ${v.consultant} in ${v.city} on ${v.dateLabel}.`,
+    `Namaste! I would like an appointment for the in-person consultation${withWhom(v)} in ${v.city} on ${v.dateLabel}.`,
     "Name: ",
     "Preferred time: ",
   ].join("\n");
 
 export const visitNextDateMessage = (v: Visit) =>
-  `Namaste! When is the next in-person consultation with ${v.consultant} in ${v.city}? I would like an appointment.`;
+  `Namaste! When is the next in-person consultation${withWhom(v)} in ${v.city}? I would like an appointment.`;
 
 /** Inline script for the root layout: before anything is painted, marks <html> with data-past-<slug> for every
  *  visit whose date has passed in IST, and data-past-all when all of them have, so dated content never flashes. */
