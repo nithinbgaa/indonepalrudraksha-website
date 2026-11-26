@@ -9,10 +9,23 @@ import { VisitCard } from "./visit";
 
 export function visitMetadata(slug: string): Metadata {
   const v = visitBySlug(slug);
+  const title = `${v.city} In-Person Rudraksha Consultation`;
+  const description = `In-person Rudraksha and horoscope consultation${v.founder ? ` with ${v.consultant}` : ""} in ${v.city} on ${v.dateLabel}, ${v.time.toLowerCase()}. Call or WhatsApp ${v.phoneDisplay} for an appointment.`;
   return {
-    title: `${v.city} In-Person Rudraksha Consultation`,
-    description: `In-person Rudraksha and horoscope consultation${v.founder ? ` with ${v.consultant}` : ""} in ${v.city} on ${v.dateLabel}, ${v.time.toLowerCase()}. Call or WhatsApp ${v.phoneDisplay} for an appointment.`,
+    title,
+    description,
     alternates: { canonical: visitPath(v) },
+    // Link previews (WhatsApp, Facebook) describe this visit, not the site-wide founder line.
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      siteName: site.name,
+      url: visitPath(v),
+      title,
+      description,
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: title }],
+    },
+    twitter: { card: "summary_large_image", title, description, images: ["/og-image.jpg"] },
   };
 }
 
