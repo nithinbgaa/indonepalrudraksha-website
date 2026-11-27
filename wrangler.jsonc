@@ -1,13 +1,26 @@
 // Cloudflare deploy settings. The site is plain files: `npm run build` writes them to ./out and
-// `npx wrangler deploy` uploads that folder. No server code runs (no "main" script).
+// `npx wrangler deploy` uploads that folder. The only code that runs on Cloudflare is the small click log in
+// worker/index.js, and only for /api/* (everything else is served straight from ./out).
 {
   "name": "indonepalrudraksha-website",
   "compatibility_date": "2026-11-16",
+  "main": "./worker/index.js",
   "assets": {
     "directory": "./out",
     // unknown addresses get out/404.html with a real 404 status
     "not_found_handling": "404-page",
     // pages live at /folder/index.html; /folder is redirected to /folder/
-    "html_handling": "auto-trailing-slash"
-  }
+    "html_handling": "auto-trailing-slash",
+    // the click log; every other address is served from ./out without running the script
+    "run_worker_first": ["/api/*"],
+  },
+  // Click log storage (Cloudflare → Storage & databases → D1). The stats key is a secret named STATS_KEY,
+  // set in the dashboard (Worker → Settings → Variables and Secrets), never in this file.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "inr-clicks",
+      "database_id": "7814a17c-ebc8-4686-99dd-fa0f903bd4de",
+    },
+  ],
 }

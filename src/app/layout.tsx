@@ -16,6 +16,7 @@ import { visitCss, visitDateScript } from "@/data/visit";
 import { CartProvider } from "@/lib/cart";
 import { CartPanel } from "@/components/cart/cart-panel";
 import { ConsentManager } from "@/components/layout/consent";
+import { ClickLog } from "@/components/layout/click-log";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <CartPanel />
         </CartProvider>
         <ConsentManager />
+        <ClickLog />
       </body>
     </html>
   );

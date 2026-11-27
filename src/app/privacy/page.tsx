@@ -14,7 +14,7 @@ const adsOn = ads.googleAdsId !== "";
 export default function Privacy() {
   const { legal, grievanceOfficer: go } = site;
   return (
-    <TextPage eyebrow="Legal" title="Privacy policy" updated="24 November 2026">
+    <TextPage eyebrow="Legal" title="Privacy policy" updated="27 November 2026">
       <p>
         This policy explains what personal data {site.name} collects through {site.url.replace("https://", "")}, on
         WhatsApp and by email, why we collect it, who we share it with, and your rights under India&apos;s Digital
@@ -48,6 +48,12 @@ export default function Privacy() {
           <strong>This website:</strong> your cart and your cookie choice are kept only in your own browser (local
           storage); they are not sent to us. Our hosting provider, Cloudflare, processes technical data such as your IP
           address to deliver the site and protect it from attacks.
+        </li>
+        <li>
+          <strong>Button counts:</strong> when you tap a Call, WhatsApp or Book button, we record the time, which
+          button, the page and city, whether you arrived from one of our Google ads, and whether you use a phone or a
+          computer. We do not record your IP address, phone number or anything else that identifies you, and we use no
+          cookies for this. We use these counts only to see which pages and ads help people reach us.
         </li>
         <li>
           <strong>Advertising cookies, only if you accept:</strong> see the next section.
